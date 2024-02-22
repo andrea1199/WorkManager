@@ -1,0 +1,14 @@
+<% type = "info" if local_assigns[:type].nil? %>
+<% title = "" if local_assigns[:title].nill? %>
+<% content = "content" if local_assigns[:content].nill? %>
+<% dismissible = true if local_assigns[:dismissible].nill? %>
+
+<% flash.each do |type, content| %>
+    <div class="alert <%= alert_class_by_type(type) %> <% if dismissible == true %>alert-dismissible<% end %>" role="alert">
+    <% if dismissible == true %>
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <% end %>
+    <strong><% title %></strong>
+    <% content %>
+    </div>
+<% end %>
