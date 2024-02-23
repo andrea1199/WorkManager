@@ -13,8 +13,10 @@ gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 gem "devise", "~> 4.9"
-gem "devise-bootstrapped", "~> 0.1.1"
+gem 'devise-bootstrapped', '~> 0.1.1'
 gem "bootstrap", "~> 5.3"
+gem "jquery-rails", "~> 4.6"
+gem "sassc-rails", "~> 2.1"
 
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
@@ -41,7 +43,3 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-
-gem "jquery-rails", "~> 4.6"
-
-gem "sassc-rails", "~> 2.1"
