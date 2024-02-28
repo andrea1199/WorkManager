@@ -10,40 +10,40 @@
 
       <!-- Navbar -->
       <ul class="nav col-12 col-lg-auto me-lg-auto justify-content-center mb-md-0">
-        <li><a href="/highlights" class="nav-link px-2 link-dark">Highlights</a></li>
-        <li><a href="/next" class="nav-link px-2 link-dark">Prossimamente</a></li>
-        <li><a href="/passed" class="nav-link px-2 link-dark">Eventi conclusi</a></li>
+        <li><a href="/highlights" class="nav-link px-2 link-dark">Chi siamo</a></li>
       </ul>
 
       <!-- Barra di ricerca -->
       <div class="me-3">
         <div class="input-group">
-          <input id="src" type="search" onchange="search()" class="form-control" placeholder="Cerca evento..."/>
+          <input id="src" type="search" onchange="search()" class="form-control" placeholder="cerca persone"/>
           <div class="input-group-text"><i class="fa fa-search"></i></div>
         </div>
       </div>
 
-      <!-- Dropdown/buttons se loggato
-      {{#if log}} -->
+      <!-- Dropdown/buttons se loggato-->
+      <% if user_signed_in? %>
 
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown button
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <li><a class="dropdown-item" href="#">Impostazioni</a></li>
-          <li><a class="dropdown-item" href="#">Il mio profilo</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-          <li><a class="dropdown-item" href="/logout">Esci</a></li>
-        </ul>
-      </div>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown button
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" href="#">Impostazioni</a></li>
+            <li><a class="dropdown-item" href="#">Il mio profilo</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><%= link_to 'Esci', destroy_user_session_path, method: :delete, class: 'dropdown-item' %></li>
+          </ul>
+        </div>
 
-      <div class="text-end">
-        <a href="/login"><button class="btn btn-primary btn-login">Accedi</button></a>
+      <% else %>
+
+        <div class="text-end">
+        <a href="/signin"><button class="btn btn-primary btn-login">Accedi</button></a>
         <a href="/signup"><button class="btn btn-primary btn-login">Registrati</button></a>
+
+      <% end %>
       </div>
     </div>
   </div>

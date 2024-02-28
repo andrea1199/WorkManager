@@ -17,7 +17,7 @@ gem 'devise-bootstrapped', '~> 0.1.1'
 gem "bootstrap", "~> 5.3"
 gem "jquery-rails", "~> 4.6"
 gem "dartsass-sprockets", "~> 3.1"
-
+gem 'font-awesome-sass'
 
 
 
