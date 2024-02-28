@@ -16,7 +16,9 @@ gem "devise", "~> 4.9"
 gem 'devise-bootstrapped', '~> 0.1.1'
 gem "bootstrap", "~> 5.3"
 gem "jquery-rails", "~> 4.6"
-gem "sassc-rails", "~> 2.1"
+gem "dartsass-sprockets", "~> 3.1"
+
+
 
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
