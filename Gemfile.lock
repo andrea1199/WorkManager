@@ -324,7 +324,7 @@ DEPENDENCIES
   debug
   devise (~> 4.9)
   devise-bootstrapped (~> 0.1.1)
-  font-awesome-sass
+  font-awesome-sass (~> 6.5.1)
   importmap-rails
   jbuilder
   jquery-rails (~> 4.6)

@@ -10,11 +10,3 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 
 pin "bootstrap", to: "bootstrap.min.js", preload: true
 pin "@popperjs/core", to: "popper.js", preload: true
-Importmap.configure do |config|
-    config.draw do
-      map "application.js", to: "application.js"
-      map "application.css", to: "application.css"
-  
-      # ...
-    end
-  end
