@@ -4,3 +4,5 @@
 //= require popper
 //= require bootstrap
 //= require jquery_ujs
+//= require font_awesome5
+//= require signin

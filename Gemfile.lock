@@ -124,9 +124,9 @@ GEM
       ruby2_keywords
     erubi (1.12.0)
     execjs (2.9.1)
-    ffi (1.16.3)
-    font-awesome-sass (6.5.1)
-      sassc (~> 2.0)
+    font_awesome5_rails (1.5.0)
+      nokogiri (>= 1.11.3)
+      railties (>= 4.2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     google-protobuf (3.25.3)
@@ -257,8 +257,6 @@ GEM
       google-protobuf (~> 3.25)
     sass-embedded (1.71.1-x86_64-linux-gnu)
       google-protobuf (~> 3.25)
-    sassc (2.4.0)
-      ffi (~> 1.9)
     sassc-embedded (1.70.0)
       sass-embedded (~> 1.70)
     selenium-webdriver (4.18.1)
@@ -324,7 +322,7 @@ DEPENDENCIES
   debug
   devise (~> 4.9)
   devise-bootstrapped (~> 0.1.1)
-  font-awesome-sass (~> 6.5.1)
+  font_awesome5_rails
   importmap-rails
   jbuilder
   jquery-rails (~> 4.6)

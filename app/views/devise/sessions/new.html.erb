@@ -1,3 +1,4 @@
+<%= javascript_include_tag 'signin' %>
 <div class="mask d-flex">
   <div class="container">
     <div class="row d-flex">
@@ -9,13 +10,18 @@
             <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
               <div class="form-outline mb-1 input-group">
                 <div class="input-group-text">
-                  <i class="fa fa-envelope" ></i>
+                  <i class="fas fa-envelope"></i>
                 </div>
                 <%= f.email_field :email, autofocus: true, placeholder: 'Email Address' , class: 'form-control' %>
               </div>
 
-              <div class="form-group">
-                <%= f.password_field :password, autocomplete: "off" , placeholder: 'Password' , class: 'form-control' %>
+              <div class="form-outline mb-3 input-group">
+                <div class="input-group-text">
+                  <i class="fas fa-lock"></i>
+                </div>
+                <%= f.password_field :password, autocomplete: "off" , placeholder: 'Password' , class: 'form-control', id: 'password' %>
+                <div class="input-group-text" onclick="showPwd()"><i class="fa fa-eye" id="pwdEye"></i></div>
+                </div>
               </div>
 
               <% if devise_mapping.rememberable? -%>
@@ -38,3 +44,4 @@
     </div>
   </div>
 </div>
+
