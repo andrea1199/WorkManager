@@ -18,6 +18,9 @@ gem "bootstrap", "~> 5.3"
 gem "jquery-rails", "~> 4.6"
 gem "dartsass-sprockets", "~> 3.1"
 gem 'font_awesome5_rails'
+gem "omniauth-github", "~> 2.0"
+gem "omniauth-google-oauth2", "~> 1.1"
+gem 'omniauth-rails_csrf_protection'
 
 
 
