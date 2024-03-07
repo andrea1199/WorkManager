@@ -37,3 +37,5 @@
 !/app/assets/builds/.keep
 
 bidone/temp.erb
+
+/config/master.key
