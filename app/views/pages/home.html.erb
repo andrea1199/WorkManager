@@ -1,2 +1,37 @@
 
 <p>Find me in app/views/pages/home.html.erb</p>
+
+<div style='taxt-align: center'>
+    <center><h1>Benvenuto in WorkManager</h1></center>
+    <center><h2>La piattaforma che ti permette di gestire i tuoi dipendenti in modo semplice e sicuro</h2></center>
+    <center> Perché scegliere noi? </center>
+    <center> 
+    <p><h3> Non siamo tutti uguali</h3></p>
+    <p> Con la nostra piattaforma potrai gestire con semplicità i dati di tutti <br>
+    i tuoi dipendenti offrendo un'esperienza intuitiva e sicura. </p>
+    <p>  La nostra app garantisce una rapida elaborazione delle informazioni,
+    dalla gestione delle presenze alla gestione delle performance, tutto in un unico luogo. </p>
+    <p>  Inoltre, potrai accedere a tutte le informazioni in tempo reale, ovunque tu sia. </p>
+    </center>
+    <center>
+    <br>
+    <br>
+    <div>
+        <p> compila il form per maggiori informazioni </p>
+        <form action="/contact" method="POST">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject" required><br><br>
+
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+
+        <input type="submit" value="Submit">
+        </form>
+    </div>
+    </center>
+    <br>
+</div>
+
