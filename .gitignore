@@ -32,10 +32,11 @@
 /public/assets
 
 # Ignore master key for decrypting credentials and more.
-/config/master.key
+
 
 !/app/assets/builds/.keep
 
 bidone/temp.erb
 
 /config/master.key
+db/schema.rb
