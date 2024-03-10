@@ -1,0 +1,7 @@
+<%= form_for @user, url: finish_signup_path(@user), method: :put do |f| %>
+  <div class="form-group">
+    <%= f.label :data_nascita %>
+    <%= f.date_field :data_di_nascita, class: 'form-control' %>
+  </div>
+  <%=f.submit "Completa registrazione" %>
+<% end %>

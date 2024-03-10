@@ -12,6 +12,9 @@ class User::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # https://github.com/heartcombo/devise#omniauth
   #
   #
+
+
+
   def github
     @user = User.create_from_provider_data(request.env['omniauth.auth'])
     if @user.persisted?
@@ -28,7 +31,7 @@ class User::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.create_from_provider_data(request.env['omniauth.auth'])
     if @user.valid?
       session[:user_attributes] = @user.attributes
-      render :additional_info
+      render :finish_signup
     else
       flash[:error]='There was a problem signing you in through Google. Please register or try signing in later.'
       redirect_to new_user_registration_url
@@ -38,6 +41,31 @@ class User::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def failure
     flash[:error] = 'There was a problem signing you in. Please register or try signing in later.'
     redirect_to new_user_registration_url
+  end
+
+
+  def finish_signup
+    @user = User.find(params[:id])
+    if User.data_di_nascita.nil?
+      render :finish_signup
+    else
+      redirect_to root_path
+    end
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to root_path
+    else
+      render :finish_signup
+    end
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:data_di_nascita)
   end
   # GET|POST /resource/auth/twitter
   # def passthru

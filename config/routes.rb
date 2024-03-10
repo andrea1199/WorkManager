@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'user/omniauth_callbacks', additional_info: 'user/additional_infos'
+  devise_for :users, controllers: { omniauth_callbacks: 'user/omniauth_callbacks'
   }
 
   devise_scope :user do
-    get 'additional_info', to: 'additional_infos#create', as: :user_additional_info
-    patch 'additional_info', to: 'additional_infos#new'
+    get 'finish_signup', to: 'user/omniauth_callbacks#finish_signup', as: :finish_signup
+    put 'finish_signup', to: 'user/omniauth_callbacks#finish_signup'
   end
 
   root 'pages#home'
