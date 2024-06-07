@@ -1,52 +1,63 @@
 <%= javascript_include_tag 'signin' %>
-<div class="row">
-  <div class="col-sm-4 col-sm-offset-4">
+<div class="mask d-flex">
+  <div class="container">
+    <div class="row d-flex">
+      <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+        <div class="card">
 
-    <h1 class="text-center">Sign Up</h1>
-    <hr>
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= devise_error_messages! %>
+          <div class="row">
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+              <%= devise_error_messages! %>
 
-      <div class="form-outline mb-1 input-group">
-        <div class="input-group-text"><i class="fa fa-envelope fa-fw"></i></div>
-        
-        <%= f.email_field :email, autofocus: false, class: 'form-control' %>
+              <div class="form-outline mb-1 input-group">
+                <div class="input-group-text"><i class="fa fa-envelope fa-fw"></i></div>
+                <%= f.email_field :email, autofocus: false, class: 'form-control' %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :password %>
+                <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> characters minimum)</em>
+                <% end %><br />
+                <div class="input-group">
+                  <div class="input-group-text"><i class="fa fa-lock fa-fw"></i></div>
+                  <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :password_confirmation %><br />
+                <div class="input-group">
+                  <div class="input-group-text"><i class="fa fa-lock fa-fw"></i></div>
+                  <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :nome %><br />
+                <%= f.text_field :nome, class: 'form-control' %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :cognome %><br />
+                <%= f.text_field :cognome, class: 'form-control' %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :data_nascita %><br />
+                <%= f.date_field :data_di_nascita, class: 'form-control' %>
+              </div>
+
+              <div class="form-group">
+                <%= f.submit "Sign up", class: "btn btn-primary btn-block btn-lg" %>
+              </div>
+            <% end %>
+            <div class="text-center">
+              <%= render "devise/shared/links" %>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div class="form-group">
-        <%= f.label :password %>
-        <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
-        <% end %><br />
-        <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :nome %><br />
-        <%= f.text_field :nome, class: 'form-control' %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :cognome %><br />
-        <%= f.text_field :cognome, class: 'form-control' %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :data_nascita %><br />
-        <%= f.date_field :data_di_nascita, class: 'form-control' %>
-      </div>
-
-      <div class="form-group">
-        <%= f.submit "Sign up", class: "btn btn-primary btn-block btn-lg" %>
-      </div>
-    <% end %>
-    <div class="text-center">
-      <%= render "devise/shared/links" %>
     </div>
   </div>
 </div>

@@ -1,0 +1,2 @@
+class DayScheduling < ApplicationRecord
+end

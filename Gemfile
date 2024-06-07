@@ -21,9 +21,7 @@ gem 'font_awesome5_rails'
 gem "omniauth-github", "~> 2.0"
 gem "omniauth-google-oauth2", "~> 1.1"
 gem 'omniauth-rails_csrf_protection'
-
-
-
+gem 'pg', "~> 1.2"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
