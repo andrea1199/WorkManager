@@ -1,8 +1,7 @@
-// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
+import 'jquery3';
+import '@popperjs/core/dist/umd/popper';
+import 'bootstrap';
+import 'jquery_ujs';
+import 'font_awesome5';
+import 'signin';
 
-//= require jquery3
-//= require popper
-//= require bootstrap
-//= require jquery_ujs
-//= require font_awesome5
-//= require signin

@@ -14,14 +14,13 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 gem "devise", "~> 4.9"
 gem 'devise-bootstrapped', '~> 0.1.1'
-gem "bootstrap", "~> 5.3"
 gem "jquery-rails", "~> 4.6"
 gem "dartsass-sprockets", "~> 3.1"
-gem 'font_awesome5_rails'
 gem "omniauth-github", "~> 2.0"
 gem "omniauth-google-oauth2", "~> 1.1"
 gem 'omniauth-rails_csrf_protection'
 gem 'pg', "~> 1.2"
+gem 'popper_js', '~> 1.16.0'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
