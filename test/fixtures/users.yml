@@ -5,49 +5,47 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  email: "john.doe@example.com"
-  encrypted_password: "capezzolo"
-  reset_password_token: 
-  reset_password_sent_at: 
-  remember_created_at: 
-  confirmation_token: 
-  confirmed_at: 
-  confirmation_sent_at: 
-  unconfirmed_email: 
-  failed_attempts: 0
-  unlock_token: 
-  locked_at: 
-  created_at: <%= 10.days.ago.to_s(:db) %>
-  updated_at: <%= Time.current.to_s(:db) %>
-  nome: "John"
-  cognome: "Doe"
-  data_di_nascita: <%= 30.years.ago.to_date %>
-  descrizione: "Una breve descrizione di John Doe."
-  ruolo: "Utente"
-  provider: "github"
-  uid: "1234567890"
-  company_id: 1
+ email: "john.doe@example.com"
+ encrypted_password: "capezzolo"
+ reset_password_token: 
+ reset_password_sent_at: 
+ remember_created_at: 
+ confirmation_token: 
+ confirmed_at: 
+ confirmation_sent_at: 
+ unconfirmed_email: 
+ failed_attempts: 0
+ unlock_token: 
+ locked_at: 
+ created_at: <%= 2.days.ago.to_date %>
+ updated_at: <%= 1.days.ago.to_date %>
+ nome: "John"
+ cognome: "Doe"
+ data_di_nascita: <%= 30.years.ago.to_date %>
+ descrizione: "Una breve descrizione di John Doe."
+ ruolo: "Utente"
+ provider: "github"
+ uid: "1234567890"
+ company_id: "pluto"
 
 two:
-    email: "john.doe@example.com"
-  encrypted_password: "luppolo"
-  reset_password_token: 
-  reset_password_sent_at: 
-  remember_created_at: 
-  confirmation_token: 
-  confirmed_at: 
-  confirmation_sent_at: 
-  unconfirmed_email: 
-  failed_attempts: 0
-  unlock_token: 
-  locked_at: 
-  created_at: <%= 2.days.ago.to_s(:db) %>
-  updated_at: <%= Time.current.to_s(:db) %>
-  nome: "martha"
-  cognome: "paperino"
-  data_di_nascita: <%= 12.years.ago.to_date %>
-  descrizione: "Una breve descrizione di John Doe."
-  ruolo: "Utente"
-  provider:
-  uid:
-  company_id: 2
+ email: "john.saa@example.com"
+ encrypted_password: "luppolo"
+ reset_password_token: 
+ reset_password_sent_at: 
+ remember_created_at: 
+ confirmation_token: 
+ confirmed_at: 
+ confirmation_sent_at: 
+ unconfirmed_email: 
+ failed_attempts: 0
+ unlock_token: 
+ locked_at: 
+ created_at: <%= 2.days.ago.to_date %>
+ updated_at: <%= Time.current.to_date %>
+ nome: "martha"
+ cognome: "paperino"
+ data_di_nascita: <%= 12.years.ago.to_date %>
+ descrizione: "Una breve descrizione di John Doe."
+ ruolo: "Utente"
+ company_id: "pippo"
