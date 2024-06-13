@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.2.2"
+ruby "3.2.3"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 gem "sprockets-rails"
 gem "sqlite3", "~> 1.4"
@@ -19,7 +19,7 @@ gem "dartsass-sprockets", "~> 3.1"
 gem "omniauth-github", "~> 2.0"
 gem "omniauth-google-oauth2", "~> 1.1"
 gem 'omniauth-rails_csrf_protection'
-gem 'pg', "~> 1.2"
+gem 'pg'
 gem 'popper_js', '~> 1.16.0'
 gem "webdrivers"
 
