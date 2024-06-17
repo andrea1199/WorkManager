@@ -47,9 +47,17 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"
   config.action_mailer.smtp_settings = {
-    address: "127.0.0.1",
-    port: 1025
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'example.com',
+    user_name:            'WorkManager.rails@gmail.com',
+    password:             'czzo xbfk qkii tpon',  # Replace with your actual password (redacted for security)
+    authentication:       'plain',
+    enable_starttls_auto: true,
+    open_timeout:         5,
+    read_timeout:         5
   }
+
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

@@ -49,11 +49,18 @@
               </div>
 
               <div class="form-group">
+                <%= f.label :company %><br />
+                <%= f.text_field :company, class: 'form-control' %>
+              </div>
+
+              <div class="form-group">
                 <%= f.submit "Sign up", class: "btn btn-primary btn-block btn-lg" %>
               </div>
             <% end %>
             <div class="text-center">
               <%= render "devise/shared/links" %>
+              <br >
+              <%= render "devise/shared/error_messages"%>
             </div>
           </div>
         </div>
