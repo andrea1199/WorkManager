@@ -24,3 +24,5 @@ Things you may want to cover:
 * ...
 
 this project uses capybara test system. 
+
+è necessaria la compilazione css, i comandi sono in package.json
