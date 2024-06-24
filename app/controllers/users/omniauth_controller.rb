@@ -1,5 +1,6 @@
 class OmniauthController < Devise::OmniauthCallbacksController
 require_relative '../models/user.rb' # Add the missing import statement
+##gestisco omniautg cakllbacks
 
 def github
      @user = User.create_from_provider_data(request.env['omniauth.auth'])
