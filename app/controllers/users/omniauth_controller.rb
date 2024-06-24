@@ -1,7 +1,7 @@
 class OmniauthController < Devise::OmniauthCallbacksController
 require_relative '../models/user.rb' # Add the missing import statement
 
-def github
+  def github
      @user = User.create_from_provider_data(request.env['omniauth.auth'])
      if @user.persisted?
           sign_in_and_redirect @user
