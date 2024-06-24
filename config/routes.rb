@@ -21,7 +21,6 @@ Rails.application.routes.draw do
   resources :companies
   resources :day_schedulings
   resources :salaires
-  resources :users
 
   get 'aziende', to: 'companies#index'
 
