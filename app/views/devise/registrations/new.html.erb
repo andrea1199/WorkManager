@@ -46,7 +46,15 @@
               <div class="form-group">
                 <%= f.label :data_nascita %><br />
                 <%= f.date_field :data_di_nascita, class: 'form-control' %>
+              </div>              
+              
+              <div class="form-group">
+                <%= f.label :company_name %><br />
+                <%= f.text_field :company_name, class: 'form-control' %>
               </div>
+
+              
+
 
               <div class="form-group">
                 <%= f.submit "Sign up", class: "btn btn-primary btn-block btn-lg" %>
