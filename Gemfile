@@ -21,6 +21,7 @@ gem "omniauth-google-oauth2", "~> 1.1"
 gem 'omniauth-rails_csrf_protection'
 gem 'pg'
 gem 'popper_js', '~> 1.16.0'
+gem "webdrivers"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -41,14 +42,9 @@ group :development do
   # gem "spring"
 end
 
-group :development, :test do
-  gem "mailcatcher"
-end
-
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
   gem "cuprite"
-  gem "webdrivers"
 end
