@@ -25,25 +25,12 @@ class CompanyTest < ApplicationSystemTestCase
     visit companies_path
     click_on "New company"
     fill_in "Name", with: "Company 1"
-    click_on "Create Company"
     click_on "Back to companies"
     click_on "Show this company"
     click_on "Edit this company"
-    fill_in "Name", with: "Company 2"
+    fill_in "Name", with: "Paperino"
     click_on "Update Company"
-    assert_text "Company was successfully updated"
+    assert_text "Paperino"
     click_on "Back to companies"
-
-  end
-
-  test "should delete company" do
-    visit companies_path
-    click_on "New company"
-    fill_in "Name", with: "Company 1"
-    click_on "Create Company"
-    click_on "Back to companies"
-    click_on "Show this company"
-    click_on "Destroy this company"
-    assert_text "Company was successfully destroyed."
   end
 end

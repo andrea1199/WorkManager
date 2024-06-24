@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'omniauth'}
-
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
+  root 'pages#home'
   get 'pages/home'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -15,12 +18,12 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     get 'signup', to: 'devise/registrations#new'
-
   end
 
   resources :companies
   resources :day_schedulings
   resources :salaires
+  resources :users
 
   get 'aziende', to: 'companies#index'
 
@@ -30,5 +33,4 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  root 'pages#home'
 end

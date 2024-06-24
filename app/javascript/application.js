@@ -4,4 +4,5 @@ import 'bootstrap';
 import 'jquery_ujs';
 import 'font_awesome5';
 import 'signin';
+import '@fortawesome/fontawesome-free/js/all.js';
 
