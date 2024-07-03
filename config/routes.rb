@@ -1,23 +1,28 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations',
-    omniauth_callbacks: 'users/omniauth_callbacks'
-  }
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    sessions: 'users/sessions'
+  }, path_names: { sign_in: 'signin', sign_out: 'signout', sign_up: 'signup' }
   root 'pages#home'
   get 'pages/home'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   devise_scope :user do
-    get 'signin', to: 'devise/sessions#new'
+    get 'signin', to: 'users/sessions#new'
   end
 
   devise_scope :user do
-    get 'settings', to: 'devise/registrations#edit'
+    get 'signout', to: 'users/sessions#destroy'
   end
 
   devise_scope :user do
-    get 'signup', to: 'devise/registrations#new'
+    get 'settings', to: 'users/registrations#edit'
+  end
+
+  devise_scope :user do
+    get 'signup', to: 'users/registrations#new'
   end
 
   resources :companies
