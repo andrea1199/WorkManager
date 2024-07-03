@@ -16,8 +16,8 @@ gem "devise", "~> 4.9"
 gem 'devise-bootstrapped', '~> 0.1.1'
 gem "jquery-rails", "~> 4.6"
 gem "dartsass-sprockets", "~> 3.1"
-gem "omniauth-github", "~> 2.0"
-gem "omniauth-google-oauth2", "~> 1.1"
+gem "omniauth-github"
+gem "omniauth-google-oauth2"
 gem 'omniauth-rails_csrf_protection'
 gem 'pg'
 gem 'popper_js', '~> 1.16.0'
