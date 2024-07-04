@@ -3,7 +3,7 @@
   <div class="container">
     <div class="d-flex flex-wrap">
       <!-- Logo -->
-      <a href="/" class="me-3">
+      <a href="/" class="me-4">
         <!-- Aspetto dell'immagine originale: 3.66:1 -->
         <%=image_tag "logo.jpg",:size => '180x180' %>
       </a>
@@ -13,8 +13,16 @@
         <li><a href="/highlights" class="nav-link px-2 link-dark">Chi siamo</a></li>
       </ul>
 
+      <% unless user_signed_in? %>
+        <div class="me-4">
+          <a href="/aziende"><button class="btn btn-primary btn-login">gestione aziende</button></a>
+          <%# <a href="/signup"><button class="btn btn-primary btn-login">Registrati</button></a> %>
+        </div>
+      <% end %>
+
+
       <!-- Barra di ricerca -->
-      <div class="me-3">
+      <div class="me-4">
         <div class="input-group">
           <input id="src" type="search" onchange="search()" class="form-control" placeholder="cerca persone"/>
           <div class="input-group-text"><i class="fa fa-search"></i></div>
@@ -40,12 +48,13 @@
 
       <% else %>
 
+
         <div class="text-end">
         <a href="/signin"><button class="btn btn-primary btn-login">Accedi</button></a>
         <a href="/signup"><button class="btn btn-primary btn-login">Registrati</button></a>
-
+        </div>
       <% end %>
-      </div>
+      
     </div>
   </div>
 </header>

@@ -40,5 +40,5 @@ bidone/temp.erb
 
 /config/master.key
 db/schema.rb
-node_modules/
+
 bidone/
