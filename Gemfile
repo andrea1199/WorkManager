@@ -22,7 +22,7 @@ gem 'omniauth-rails_csrf_protection'
 gem 'pg'
 gem 'popper_js', '~> 1.16.0'
 gem "webdrivers"
-
+gem "font-awesome-sass", "~> 5.6.1"
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
