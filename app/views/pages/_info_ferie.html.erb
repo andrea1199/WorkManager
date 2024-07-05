@@ -1,0 +1,10 @@
+<div class="col-md-4" id="leaveInfo" style="display: none;">
+    <h2>Informazioni Ferie</h2>
+    <div class="form-group">
+        <label for="daysTaken">Giorni presi:</label>
+        <input type="number" class="form-control" id="daysTaken" oninput="enableSaveLeaveButton()">
+        <label for="daysLeft">Giorni rimasti:</label>
+        <input type="number" class="form-control" id="daysLeft" oninput="enableSaveLeaveButton()">
+    </div>
+    <button id="saveLeaveButton" class="btn btn-success mt-2 ml-2" onclick="saveLeaveDays()" disabled>Salva</button>
+</div>
