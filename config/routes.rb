@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :salaires
   resources :users
   resources :dirigente, only: [:index, :show]
+  resources :dipendente, only: [:index, :show]
 
   get 'aziende', to: 'aziende#index'
 

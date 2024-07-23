@@ -1,0 +1,29 @@
+<body>
+    <div class="tab-pane fade active show"">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link" id="dash-tab" data-toggle="tab" href="#dash" role="tab" aria-controls="dash" aria-selected="false">Dashboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Informazioni Personali</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="dipendenti-tab" data-toggle="tab" href="#dipendenti" role="tab" aria-controls="dipendenti" aria-selected="false">Dipendenti</a>
+        </li>
+        </ul>
+
+        <div class="tab-content">
+        <div class="tab-pane fade" id="dash" role="tabpanel" aria-labelledby="dash-tab">
+            <%= render "dirigente/dirigenteDashboard" %>
+        </div>
+
+        <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info-tab">
+            <%= render "dirigente/dirigenteSuInfoPersonali" %>
+        </div>
+
+        <div class="tab-pane fade" id="dipendenti" role="tabpanel" aria-labelledby="dipendenti-tab">
+            <%= render "dirigente/dipendenti" %>
+        </div>
+
+        </div>
+</body>

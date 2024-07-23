@@ -1,0 +1,89 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 border-right">
+            <h2>Info Personali:</h2>
+        </div>
+    </div>
+<div class="row">
+    <div class="col-md-4 border-right"></div>
+    <div class="col-md-4" id="salaryInfo">
+            <h2>Informazioni Stipendio</h2>
+            <select id="monthSelect" class="form-control mb-3" onchange="showSalaryInfo()">
+                <option value="" disabled selected>Seleziona un mese</option>
+                <option value="Jan">Gennaio</option>
+                <option value="Feb">Febbraio</option>
+                <option value="Mar">Marzo</option>
+                <option value="Apr">Aprile</option>
+                <option value="Mag">Maggio</option>
+                <option value="Giu">Giugno</option>
+                <option value="Lug">Luglio</option>
+                <option value="Ago">Agosto</option>
+                <option value="Set">Settembre</option>
+                <option value="Ott">Ottobre</option>
+                <option value="Nov">Novembre</option>
+                <option value="Dic">Dicembre</option>
+            </select>
+            <p><strong>Stipendio:</strong> <span id="salaryAmount"></span></p>
+    </div>
+</div>
+
+<!-- Sezione delle informazioni sui giorni di ferie rimasti-->
+<div class="row">
+    <div class="col-md-4 border-right"></div>
+        <div class="col-md-4" id="leaveInfo">
+            <h2>Informazioni Ferie</h2>
+            <div class="form-group">
+                <label for="daysTaken">Giorni presi:</label>
+                <input type="number" class="form-control" id="daysTaken" oninput="enableSaveLeaveButton()">
+                <label for="daysLeft">Giorni rimasti:</label>
+                <input type="number" class="form-control" id="daysLeft" oninput="enableSaveLeaveButton()">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sezione delle informazioni sugli orari -->
+<div class="row">
+    <div class="col-md-4 border-right"></div>
+        <div class="col-md-4" id="workSchedule">
+            <div class="col-md-16">
+                <h2>Orario di Lavoro</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Giorno</th>
+                            <th scope="col">Ingresso</th>
+                            <th scope="col">Uscita</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lunedì</td>
+                            <td id="mondayEntry"></td>
+                            <td id="mondayExit"></td>
+                        </tr>
+                        <tr>
+                            <td>Martedì</td>
+                            <td id="tuesdayEntry"></td>
+                            <td id="tuesdayExit"></td>
+                        </tr>
+                        <tr>
+                            <td>Mercoledì</td>
+                            <td id="wednesdayEntry"></td>
+                            <td id="wednesdayExit"></td>
+                        </tr>
+                        <tr>
+                            <td>Giovedì</td>
+                            <td id="thursdayEntry"></td>
+                            <td id="thursdayExit"></td>
+                        </tr>
+                        <tr>
+                            <td>Venerdì</td>
+                            <td id="fridayEntry"></td>
+                            <td id="fridayExit"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>
