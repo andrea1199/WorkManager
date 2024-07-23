@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   }, path_names: { sign_in: 'signin', sign_out: 'signout', sign_up: 'signup' }
   root 'pages#home'
   get 'pages/home'
+  
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -21,8 +22,9 @@ Rails.application.routes.draw do
   resources :day_schedulings
   resources :salaires
   resources :users
+  resources :dirigenti, only: [:index, :show]
 
-  get 'aziende', to: 'companies#index'
+  get 'aziende', to: 'dirigente#_dirigenti'
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
@@ -31,3 +33,4 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 end
+

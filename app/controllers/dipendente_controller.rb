@@ -1,0 +1,2 @@
+class DipendenteController < ApplicationController
+end

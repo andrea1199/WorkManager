@@ -1,0 +1,2 @@
+module DipendenteHelper
+end
