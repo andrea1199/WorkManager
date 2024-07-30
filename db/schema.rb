@@ -88,7 +88,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_07_154346) do
     t.string "cognome"
     t.date "data_di_nascita"
     t.text "descrizione"
-    t.string "ruolo"
+    t.string "ruolo", default: "0", null: false
     t.string "provider", limit: 50, default: "", null: false
     t.string "uid", limit: 50, default: "", null: false
     t.bigint "company_id"
