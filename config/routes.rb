@@ -22,8 +22,11 @@ Rails.application.routes.draw do
   resources :day_schedulings
   resources :salaires
   resources :users
+
   resources :dirigente, only: [:index, :show]
   resources :dipendente, only: [:index, :show]
+
+  get 'admin', to: 'admin#index', as: 'admin_index'
 
   get 'aziende', to: 'aziende#index'
 

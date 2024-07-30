@@ -1,15 +1,15 @@
 <div class="card p-4">
     <div class="col-md-4 border-right">
-        <h2>Dipendenti</h2>
-            <%= label_tag :dirigente_id, 'Seleziona Dipendente:' %>
-            <%= select_tag :dirigente_id, options_from_collection_for_select(@dirigenti, 'id', 'nome_completo'), prompt: 'Seleziona un dipendente' %>
+        <h2>Dirigenti</h2>
+            <%= label_tag :dirigente_id, 'Seleziona Dirigente:' %>
+            <%= select_tag :dirigente_id, options_from_collection_for_select(@dipendenti, 'id', 'nome_completo'), prompt: 'Seleziona un dirigente' %>
             <%= submit_tag 'Mostra Dettagli' %>
     </div>
 </div>
 
 <% if @selected_dirigente %>
     <div class="col-md-8">
-    <h2>Dettagli del Dipendente</h2>
+    <h2>Dettagli del Dirigente</h2>
     <p><strong>Nome:</strong> <%= @selected_dirigente.first_name %></p>
     <p><strong>Cognome:</strong> <%= @selected_dirigente.last_name %></p>
     <p><strong>Telefono:</strong> <%= @selected_dirigente.phone %></p>
