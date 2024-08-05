@@ -21,7 +21,8 @@ Rails.application.routes.draw do
   resources :companies
   resources :day_schedulings
   resources :salaires
-  resources :users
+
+  resources :users, only: [:index, :show]
 
   resources :dirigente, only: [:index, :show]
   resources :dipendente, only: [:index, :show]

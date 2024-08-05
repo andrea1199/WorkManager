@@ -3,6 +3,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:github , :google_oauth2]
 
+  ROLES = %w[dipendente dirigente admin]
+
+  validates :ruolo, inclusion: { in: ROLES }
+
   belongs_to :company, optional: true
 
   # def self.from_omniauth(auth)

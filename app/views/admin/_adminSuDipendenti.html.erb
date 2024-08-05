@@ -1,20 +1,21 @@
+<!-- app/views/admin/_adminSuDipendenti.html.erb -->
 <div class="card p-4">
-    <div class="col-md-4 border-right">
-        <h2>Dipendenti</h2>
-            <%= label_tag :dipendente_id, 'Seleziona Dipendente:' %>
-            <%= select_tag :dipendente_id, options_from_collection_for_select(@dipendenti, 'id', 'nome_completo'), prompt: 'Seleziona un dipendente' %>
-            <%= submit_tag 'Mostra Dettagli' %>
-    </div>
-</div>
+  <div class="col-md-4 border-right">
+    <h2>Dipendenti</h2>
 
-<% if @selected_dipendente %>
-    <div class="col-md-8">
-    <h2>Dettagli del Dipendente</h2>
-    <p><strong>Nome:</strong> <%= @selected_dipendente.first_name %></p>
-    <p><strong>Cognome:</strong> <%= @selected_dipendente.last_name %></p>
-    <p><strong>Telefono:</strong> <%= @selected_dipendente.phone %></p>
-    <p><strong>Email:</strong> <%= @selected_dipendente.email %></p>
-    <p><strong>Azienda:</strong> <%= @selected_dipendente.company %></p>
-    <p><strong>Descrizione:</strong> <%= @selected_dipendente.description %></p>
-    </div>
-<% end %>
+    <%= form_with url: users_path, method: :get, local: true do %>
+      <%= select_tag :ruolo, options_for_select([['Dirigenti', 'dirigente'], ['Dipendenti', 'dipendente']], params[:ruolo]), prompt: "Seleziona un ruolo" %>
+      <%= submit_tag 'Mostra' %>
+    <% end %>
+
+    <% if @users.present? && @users.any? %>
+      <ul>
+        <% @users.each do |user| %>
+          <li><%= link_to user.name, user_path(user) %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>Nessun utente trovato.</p>
+    <% end %>
+  </div>
+</div>
