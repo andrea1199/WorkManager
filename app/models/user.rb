@@ -29,10 +29,6 @@ class User < ApplicationRecord
     end
   end
 
-  def nome
-    "#{nome}"
-  end
-
   def admin?
     ruolo == 'admin'
   end

@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   resources :dipendente, only: [:index, :show]
 
   get 'admin', to: 'admin#index', as: 'admin_index'
+  get 'dashboard', to: 'users#dashboard'
+  patch 'user_update', to: 'users#update'
 
   get 'aziende', to: 'companies#index', as: 'aziende_index'
 

@@ -9,22 +9,31 @@
 #   end
 
 User.create!(
-    nome: "dipendente",
+    nome: "dipendente_nome",
+    cognome: "dipendente_cognome",
     email: "dipendente@gmail.com",
     password: "password",
-    ruolo: "dipendente"
+    ruolo: "dipendente",
+    data_di_nascita: "1990-01-01",
+    descrizione: "sono un dipendente"
 )
 
 User.create!(
-    nome: "dirigente",
+    nome: "dirigente_nome",
+    cognome: "dirigente_cognome",
     email: "dirigente@gmail.com",
     password: "password",
-    ruolo: "dirigente"
+    ruolo: "dirigente",
+    data_di_nascita: "1990-01-01",
+    descrizione: "sono un dirigente"
 )
 
 User.create!(
-    nome: "admin",
+    nome: "admin_nome",
+    cognome: "admin_cognome",
     email: "admin@gmail.com",
     password: "password",
-    ruolo: "admin"
+    ruolo: "admin",
+    data_di_nascita: "1990-01-01",
+    descrizione: "sono un admin"
 )
