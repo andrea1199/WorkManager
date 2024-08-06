@@ -1,21 +1,19 @@
-<!-- app/views/admin/_adminSuDipendenti.html.erb -->
 <div class="card p-4">
   <div class="col-md-4 border-right">
     <h2>Dipendenti</h2>
 
     <%= form_with url: users_path, method: :get, local: true do %>
-      <%= select_tag :ruolo, options_for_select([['Dirigenti', 'dirigente'], ['Dipendenti', 'dipendente']], params[:ruolo]), prompt: "Seleziona un ruolo" %>
+      <% dipendenti = User.where(ruolo: 'dipendente') %>
+      <%= select_tag :user_id, options_from_collection_for_select(dipendenti, :id, :nome), prompt: "Seleziona un dipendente" %>
       <%= submit_tag 'Mostra' %>
     <% end %>
 
-    <% if @users.present? && @users.any? %>
-      <ul>
-        <% @users.each do |user| %>
-          <li><%= link_to user.name, user_path(user) %></li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p>Nessun utente trovato.</p>
+    <% if params[:user_id].present? %>
+      <% user = User.find(params[:user_id]) %>
+      <h2><%= link_to user.nome, user_path(user) %></h2>
+      <p><%= user.email %></p>
     <% end %>
+
   </div>
 </div>
+
