@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show]
 
-  resources :dirigente, only: [:index, :show]
+  resources :dirigente, only: [:index, :show], controller: 'dirigente'
   resources :dipendente, only: [:index, :show]
 
   get 'admin', to: 'admin#index', as: 'admin_index'

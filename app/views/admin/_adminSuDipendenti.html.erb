@@ -8,6 +8,7 @@
       <%= submit_tag 'Mostra' %>
     <% end %>
 
+
     <% if params[:user_id].present? %>
       <% user = User.find(params[:user_id]) %>
       <h2><%= link_to user.nome, user_path(user) %></h2>

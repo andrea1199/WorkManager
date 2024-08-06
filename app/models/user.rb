@@ -27,9 +27,21 @@ class User < ApplicationRecord
            password: Devise.friendly_token[0,20]
         )
     end
+  end
 
-    def nome_completo
-      "#{first_name} #{last_name}"
-    end
-end
+  def nome
+    "#{nome}"
+  end
+
+  def admin?
+    ruolo == 'admin'
+  end
+
+  def dirigente?
+    ruolo == 'dirigente'
+  end
+
+  def dipendente?
+    ruolo == 'dipendente'
+  end
 end
