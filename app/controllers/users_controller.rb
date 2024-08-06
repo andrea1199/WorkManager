@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :set_user
 
   def dashboard
     @user = current_user
@@ -16,9 +17,8 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :descrizione)
+    params.require(:user).permit(:nome, :cognome, :data_di_nascita, :email, :descrizione)
   end
-end
 
   def index
     if params[:ruolo].present?
@@ -30,5 +30,9 @@ end
 
   def show
     @user = User.find(params[:id])
+  end
+
+  def set_user
+    @user = current_user
   end
 end
