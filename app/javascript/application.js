@@ -6,3 +6,4 @@ import 'font_awesome5';
 import 'signin';
 import '@fortawesome/fontawesome-free/js/all.js';
 
+import './show_selected_user_info';

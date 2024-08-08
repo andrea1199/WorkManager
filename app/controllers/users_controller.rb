@@ -14,12 +14,6 @@ class UsersController < ApplicationController
     end
   end
 
-  private
-
-  def user_params
-    params.require(:user).permit(:nome, :cognome, :data_di_nascita, :email, :descrizione)
-  end
-
   def index
     if params[:ruolo].present?
       @users = User.where(ruolo: params[:ruolo])
@@ -30,6 +24,20 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+  end
+
+  def show_selected_user_info
+    @user = User.find(params[:user_id])
+
+    respond_to do |format|
+      format.html { render partial: 'dirigente/user_details', locals: { user: @user } }
+    end
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:nome, :cognome, :data_di_nascita, :email, :descrizione)
   end
 
   def set_user

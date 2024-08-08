@@ -1,18 +1,13 @@
 <div class="card p-4">
-    <div class="col-md-4 border-right">
-        <h2>Dipendenti</h2>
-        <%= form_with url: users_path, method: :get, local: true do %>
-            <% dipendenti = User.where(ruolo: 'dipendente') %>
-            <%= select_tag :user_id, options_from_collection_for_select(dipendenti, :id, :nome), prompt: "Seleziona un dipendente" %>
-            <%= submit_tag 'Mostra' %>
-          <% end %>
-      
-      
-          <% if params[:user_id].present? %>
-            <% user = User.find(params[:user_id]) %>
-            <h2><%= link_to user.nome, user_path(user) %></h2>
-            <p><%= user.email %></p>
-          <% end %>
-      
-    </div>
+  <div class="col-md-4 border-right">
+    <h2>Dipendenti</h2>
+    <%= form_with url: show_selected_user_info_users_path, method: :get, remote: true do %>
+      <% dipendenti = User.where(ruolo: 'dipendente') %>
+      <%= select_tag :user_id, options_from_collection_for_select(dipendenti, :id, :nome), prompt: "Seleziona un dipendente" %>
+      <%= submit_tag 'Mostra' %>
+    <% end %>
+  </div>
+  <div class="col-md-8" id="user-info">
+    <!-- Il contenuto verrà caricato qui -->
+  </div>
 </div>
