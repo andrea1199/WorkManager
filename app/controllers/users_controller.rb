@@ -28,12 +28,10 @@ class UsersController < ApplicationController
 
   def show_selected_user_info
     @user = User.find(params[:user_id])
-
-    respond_to do |format|
-      format.html { render partial: 'dirigente/user_details', locals: { user: @user } }
-    end
+    render 'dirigente/user_details', locals: { user: @user }
   end
-
+  
+  
   private
 
   def user_params

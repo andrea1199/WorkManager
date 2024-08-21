@@ -1,0 +1,8 @@
+<!-- app/views/dirigente/user_details_full.html.erb -->
+<%render 'dirigente/dirigenteSuDipendenti', user: @user %>
+<div class="card p-4">
+  <h3>Dettagli per: <%= user.nome %></h3>
+  <p>Orario: <%= render 'dirigente/orario_lavoro', user: user %></p>
+  <p>Ferie: <%= render 'dirigente/info_ferie', user: user %></p>
+  <p>Stipendio: <%= render 'dirigente/info_stipendio', user: user %></p>
+</div>
