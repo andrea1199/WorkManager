@@ -1,16 +1,17 @@
-<div class="card p-4">
-    <div class="col-md-4 border-right">
-        <h2>Dirigenti</h2>
-        <%= form_with url: users_path, method: :get, local: true do %>
-            <% dirigenti = User.where(ruolo: 'dirigente') %>
-            <%= select_tag :user_id, options_from_collection_for_select(dirigenti, :id, :nome), prompt: "Seleziona un dirigente" %>
-            <%= submit_tag 'Mostra' %>
-          <% end %>
-          
-        <% if params[:user_id].present? %>
-            <% user = User.find(params[:user_id]) %>
-            <h2><%= link_to user.nome, user_path(user) %></h2>
-            <p><%= user.email %></p>
-        <% end %>
+<div class="mask d-flex">
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="card p-4">
+          <div class="col-md-4 border-right">
+            <h2>Dirigenti</h2>
+            <%= form_with url: show_selected_user_info_users_path, method: :get, target: "_blank" do |f| %>
+              <% dirigenti = User.where(ruolo: 'dirigente') %>
+              <%= select_tag :user_id, options_from_collection_for_select(dirigenti, :id, :nome), prompt: "Seleziona un dirigente" %>
+              <%= f.submit 'Mostra' %>
+            <% end %>
+          </div>
+        </div>
     </div>
+  </div>
 </div>
+
