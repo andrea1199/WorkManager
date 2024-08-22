@@ -1,16 +1,17 @@
 class UsersController < ApplicationController
   before_action :set_user
+  before_action :authenticate_user!
+
 
   def dashboard
     @user = current_user
   end
 
   def update
-    @user = current_user
-    if @user.update(user_params)
-      redirect_to dashboard_path, notice: 'Profile updated successfully.'
+    if current_user.update(user_params)
+      redirect_to dashboard_path, notice: 'Profilo aggiornato con successo.'
     else
-      render :dashboard
+      render 'users/dashboard'
     end
   end
 
@@ -35,7 +36,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:nome, :cognome, :data_di_nascita, :email, :descrizione)
+    params.require(:user).permit(:email, :descrizione)
   end
 
   def set_user
