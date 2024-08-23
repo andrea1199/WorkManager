@@ -8,32 +8,97 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+# Utenti predefiniti
 User.create!(
-    nome: "dipendente_nome",
-    cognome: "dipendente_cognome",
-    email: "dipendente@gmail.com",
-    password: "password",
-    ruolo: "dipendente",
-    data_di_nascita: "1990-01-01",
-    descrizione: "sono un dipendente"
+  nome: "dipendente_nome",
+  cognome: "dipendente_cognome",
+  email: "dipendente@gmail.com",
+  password: "password",
+  ruolo: "dipendente",
+  data_di_nascita: "1990-01-01",
+  descrizione: "sono un dipendente",
+  company_id: 1
 )
 
 User.create!(
-    nome: "dirigente_nome",
-    cognome: "dirigente_cognome",
-    email: "dirigente@gmail.com",
-    password: "password",
-    ruolo: "dirigente",
-    data_di_nascita: "1990-01-01",
-    descrizione: "sono un dirigente"
+  nome: "dipendente_b",
+  cognome: "dipendente_b",
+  email: "dipendenteb@gmail.com",
+  password: "password",
+  ruolo: "dipendente",
+  data_di_nascita: "1990-01-01",
+  descrizione: "sono un dipendente",
+  company_id: 2
 )
 
 User.create!(
-    nome: "admin_nome",
-    cognome: "admin_cognome",
-    email: "admin@gmail.com",
-    password: "password",
-    ruolo: "admin",
-    data_di_nascita: "1990-01-01",
-    descrizione: "sono un admin"
+  nome: "dirigente_nome",
+  cognome: "dirigente_cognome",
+  email: "dirigente@gmail.com",
+  password: "password",
+  ruolo: "dirigente",
+  data_di_nascita: "1990-01-01",
+  descrizione: "sono un dirigente",
+  company_id: 1
 )
+
+User.create!(
+  nome: "dirigente2_nome",
+  cognome: "dirigente2_cognome",
+  email: "dirigente2@gmail.com",
+  password: "password",
+  ruolo: "dirigente",
+  data_di_nascita: "1990-01-01",
+  descrizione: "sono un dirigente",
+  company_id: 2
+)
+
+User.create!(
+  nome: "admin_nome",
+  cognome: "admin_cognome",
+  email: "admin@gmail.com",
+  password: "password",
+  ruolo: "admin",
+  data_di_nascita: "1990-01-01",
+  descrizione: "sono un admin",
+  company_id: 1
+)
+
+User.create!(
+  nome: "admin2_nome",
+  cognome: "admin2_cognome",
+  email: "admin2@gmail.com",
+  password: "password",
+  ruolo: "admin",
+  data_di_nascita: "1990-01-01",
+  descrizione: "sono un admin",
+  company_id: 2
+)
+
+# Aggiunta degli stipendi per ogni utente
+User.all.each do |user|
+  # Genera 12 stipendi, uno per ogni mese del 2024
+  (1..12).each do |month|
+    Salaire.create!(
+      date: Date.new(2024, month, 1),   # La data dello stipendio: primo giorno di ogni mese
+      value: rand(2000..5000),          # Importo dello stipendio casuale tra 2000€ e 5000€
+      employee_id: user.id              # Associa lo stipendio all'utente corrente
+    )
+  end
+end
+
+# Aggiunta degli orari di lavoro per ogni utente
+User.all.each do |user|
+  days_of_week = %w[Monday Tuesday Wednesday Thursday Friday]
+
+  days_of_week.each do |day|
+    DayScheduling.create!(
+      date: Date.parse(day),               # Giorno della settimana
+      start_work: '09:00',                 # Orario di inizio lavoro
+      end_work: '17:00',                   # Orario di fine lavoro
+      start_break: '13:00',                # Inizio pausa pranzo
+      end_break: '14:00',                  # Fine pausa pranzo
+      employee_id: user.id                 # Associa l'orario di lavoro all'utente corrente
+    )
+  end
+end

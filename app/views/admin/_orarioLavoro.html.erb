@@ -1,0 +1,42 @@
+<div class="col-md-4" id="workSchedule">
+  <div class="col-md-16">
+    <h2>Orario di Lavoro</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Giorno</th>
+          <th scope="col">Ingresso</th>
+          <th scope="col">Uscita</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% work_schedules = user.day_schedulings.group_by { |ds| ds.date.strftime('%A') } %>
+        <tr>
+          <td>Lunedì</td>
+          <td id="mondayEntry"><%= work_schedules['Monday']&.first&.start_work&.strftime('%H:%M') || 'N/A' %></td>
+          <td id="mondayExit"><%= work_schedules['Monday']&.first&.end_work&.strftime('%H:%M') || 'N/A' %></td>
+        </tr>
+        <tr>
+          <td>Martedì</td>
+          <td id="tuesdayEntry"><%= work_schedules['Tuesday']&.first&.start_work&.strftime('%H:%M') || 'N/A' %></td>
+          <td id="tuesdayExit"><%= work_schedules['Tuesday']&.first&.end_work&.strftime('%H:%M') || 'N/A' %></td>
+        </tr>
+        <tr>
+          <td>Mercoledì</td>
+          <td id="wednesdayEntry"><%= work_schedules['Wednesday']&.first&.start_work&.strftime('%H:%M') || 'N/A' %></td>
+          <td id="wednesdayExit"><%= work_schedules['Wednesday']&.first&.end_work&.strftime('%H:%M') || 'N/A' %></td>
+        </tr>
+        <tr>
+          <td>Giovedì</td>
+          <td id="thursdayEntry"><%= work_schedules['Thursday']&.first&.start_work&.strftime('%H:%M') || 'N/A' %></td>
+          <td id="thursdayExit"><%= work_schedules['Thursday']&.first&.end_work&.strftime('%H:%M') || 'N/A' %></td>
+        </tr>
+        <tr>
+          <td>Venerdì</td>
+          <td id="fridayEntry"><%= work_schedules['Friday']&.first&.start_work&.strftime('%H:%M') || 'N/A' %></td>
+          <td id="fridayExit"><%= work_schedules['Friday']&.first&.end_work&.strftime('%H:%M') || 'N/A' %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

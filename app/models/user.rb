@@ -1,11 +1,12 @@
 class User < ApplicationRecord
+
+  has_many :salaires, foreign_key: :employee_id, dependent: :destroy
+  has_many :day_schedulings, foreign_key: 'employee_id', dependent: :destroy
+
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:github , :google_oauth2]
-
-  ROLES = %w[dipendente dirigente admin]
-
-  validates :ruolo, inclusion: { in: ROLES }
 
   belongs_to :company, optional: true
 

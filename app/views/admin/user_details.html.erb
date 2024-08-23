@@ -1,4 +1,4 @@
-<!-- app/views/dirigente/user_details_full.html.erb -->
+<!-- app/views/admin/user_details.html.erb -->
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4 border-right">
@@ -8,20 +8,21 @@
     <div class="row">
       <div class="col-md-4 border-right"></div>
       <div class="col-md-4" id="workSchedule">
-        <%= render 'dirigente/orario_lavoro', user: user %>
+        <%= render 'admin/orarioLavoro', user: user %>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4 border-right"></div>
       <div class="col-md-4" id="leaveInfo">
-        <%= render 'dirigente/info_ferie', user: user %>
+        <%= render 'admin/infoFerie', user: user %>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4 border-right"></div>
       <div class="col-md-4" id="salaryInfo">
-        <%= render 'dirigente/info_stipendio', user: user %>
+        <%= render 'admin/infoStipendio', user: user %>
         <a href="/"><button class="btn btn-primary mt-2">Torna alla home</button></a>
+        <%= button_to 'Promuovi', promuovi_user_path(user), method: :patch, class: 'btn btn-primary', data: { confirm: 'Sei sicuro di voler promuovere questo utente a dirigente?' } %>
       </div>
     </div>
 </div>
