@@ -22,7 +22,6 @@
       <div class="col-md-4" id="salaryInfo">
         <%= render 'admin/infoStipendio', user: user %>
         <a href="/"><button class="btn btn-primary mt-2">Torna alla home</button></a>
-        <%= button_to 'Promuovi', promuovi_user_path(user), method: :patch, class: 'btn btn-primary', data: { confirm: 'Sei sicuro di voler promuovere questo utente a dirigente?' } %>
       </div>
     </div>
 </div>

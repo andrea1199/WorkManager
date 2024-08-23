@@ -29,7 +29,14 @@ class UsersController < ApplicationController
 
   def show_selected_user_info
     @user = User.find(params[:user_id])
-    render 'dirigente/user_details', locals: { user: @user }
+    @salaires = @user.salaires.order(date: :asc) # Carica gli stipendi dell'utente
+    if current_user.dirigente?
+      render 'dirigente/user_details', locals: { user: @user }
+    elsif current_user.admin?
+      render 'admin/user_details', locals: { user: @user }
+    else
+      redirect_to root_path, alert: "Non autorizzato a visualizzare queste informazioni."
+    end
   end
   
   
