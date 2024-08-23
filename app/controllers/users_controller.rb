@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:user_id])
     @salaires = @user.salaires.order(date: :asc) # Carica gli stipendi dell'utente
     if current_user.dirigente?
-      render 'dirigente/user_details', locals: { user: @user }
+      render 'dirigente/dirigenteSuInfoPersonali', locals: { user: @user }
     elsif current_user.admin?
       render 'admin/user_details', locals: { user: @user }
     else

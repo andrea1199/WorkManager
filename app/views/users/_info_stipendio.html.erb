@@ -1,0 +1,26 @@
+<div class="col-md-4" id="salaryInfo">
+  <h2>Informazioni Stipendio</h2>
+  <select id="monthSelect" class="form-control mb-3" onchange="showSalaryInfo()">
+    <option value="" disabled selected>Seleziona un mese</option>
+    <% current_user.salaires.each do |salaire| %>
+      <option value="<%= salaire.date.strftime('%Y-%m') %>"><%= salaire.date.strftime('%B %Y') %></option>
+    <% end %>
+  </select>
+  <p><strong>Stipendio:</strong> <span id="salaryAmount">Seleziona un mese per visualizzare lo stipendio</span></p>
+</div>
+
+<script>
+  // Converti la data in formato YYYY-MM per uniformità
+  const salaries = <%= current_user.salaires.map { |salaire| { date: salaire.date.strftime('%Y-%m'), value: salaire.value } }.to_json.html_safe %>;
+
+  function showSalaryInfo() {
+    const selectedDate = document.getElementById('monthSelect').value;
+    const selectedSalary = salaries.find(salary => salary.date === selectedDate);
+
+    if (selectedSalary) {
+      document.getElementById('salaryAmount').textContent = selectedSalary.value + ' €';
+    } else {
+      document.getElementById('salaryAmount').textContent = 'Nessuno stipendio disponibile per questo mese';
+    }
+  }
+</script>
