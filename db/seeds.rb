@@ -8,6 +8,15 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+# Aziende predefinite
+Company.create!(
+  name: "a"
+)
+Company.create!(
+  name: "b"
+)
+
+
 # Utenti predefiniti
 User.create!(
   nome: "dipendente_nome",
