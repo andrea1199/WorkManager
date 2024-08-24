@@ -1,0 +1,26 @@
+<div class="container mt-5">
+  <h2>Retrocedi Dirigenti a Dipendenti</h2>
+  <%= form_with url: retrocedi_selected_users_path, method: :post do %>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Cognome</th>
+          <th>Email</th>
+          <th>Seleziona per retrocessione</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% User.where(ruolo: 'dirigente').each do |dirigente| %>
+          <tr>
+            <td><%= dirigente.nome %></td>
+            <td><%= dirigente.cognome %></td>
+            <td><%= dirigente.email %></td>
+            <td><%= check_box_tag 'user_ids[]', dirigente.id %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= submit_tag 'Retrocedi Selezionati', class: 'btn btn-primary' %>
+  <% end %>
+</div>

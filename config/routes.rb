@@ -24,6 +24,12 @@ Rails.application.routes.draw do
     collection do
       get 'confirm', to: 'users#confirm', as: 'confirm'
       get 'show_selected_user_info'
+      get 'promote', to: 'users#promote', as: 'promote'
+      post 'promote_selected', to: 'users#promote_selected'
+      get 'promote_confirm', to: 'users#promote_confirm', as: 'promote_confirm'
+      get 'retrocedi', to: 'users#retrocedi', as: 'retrocedi'
+      post 'retrocedi_selected', to: 'users#retrocedi_selected'
+      get 'retrocedi_confirm', to: 'users#retrocedi_confirm', as: 'retrocedi_confirm'
     end
   end
 

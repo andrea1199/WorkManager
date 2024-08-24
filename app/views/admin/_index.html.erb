@@ -11,6 +11,12 @@
       <li class="nav-item">
         <a class="nav-link" id="dipendenti-tab" data-toggle="tab" href="#dipendenti" role="tab" aria-controls="dipendenti" aria-selected="false">Dipendenti</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" id="promote-tab" data-toggle="tab" href="#promote" role="tab" aria-controls="promote" aria-selected="false">Promuovi Dipendenti</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="retrocedi-tab" data-toggle="tab" href="#retrocedi" role="tab" aria-controls="retrocedi" aria-selected="false">Retrocedi Dirigenti</a>
+      </li>
     </ul>
 
     <div class="tab-content">
@@ -24,6 +30,13 @@
 
       <div class="tab-pane fade" id="dipendenti" role="tabpanel" aria-labelledby="dipendenti-tab">
         <%= render "admin/adminSuDipendenti" %>
+      </div>
+            
+      <div class="tab-pane fade" id="promote" role="tabpanel" aria-labelledby="promote-tab">
+        <%= render "admin/promote" %>
+      </div>
+      <div class="tab-pane fade" id="retrocedi" role="tabpanel" aria-labelledby="retrocedi-tab">
+        <%= render "admin/retrocedi" %>
       </div>
     </div>
   </div>
