@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   root 'pages#home'
   get 'pages/home'
+  get 'chiSiamo', to: 'pages#chiSiamo'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   devise_scope :user do
@@ -39,7 +40,6 @@ Rails.application.routes.draw do
   get 'admin', to: 'admin#index', as: 'admin_index'
   get 'dashboard', to: 'users#dashboard'
   patch 'user_update', to: 'users#update'
-
 
   get 'aziende', to: 'companies#index', as: 'aziende_index'
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
