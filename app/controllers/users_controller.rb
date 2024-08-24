@@ -9,10 +9,14 @@ class UsersController < ApplicationController
 
   def update
     if current_user.update(user_params)
-      redirect_to dashboard_path, notice: 'Profilo aggiornato con successo.'
+      redirect_to confirm_users_path # Reindirizza alla pagina di conferma
     else
       render 'users/dashboard'
     end
+  end
+
+  def confirm
+    render 'users/confirm'
   end
 
   def index

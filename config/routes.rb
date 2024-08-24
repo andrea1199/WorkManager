@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   resources :users do
     collection do
+      get 'confirm', to: 'users#confirm', as: 'confirm'
       get 'show_selected_user_info'
     end
   end
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
   get 'admin', to: 'admin#index', as: 'admin_index'
   get 'dashboard', to: 'users#dashboard'
   patch 'user_update', to: 'users#update'
+
 
   get 'aziende', to: 'companies#index', as: 'aziende_index'
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
