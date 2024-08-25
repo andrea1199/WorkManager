@@ -9,6 +9,10 @@
 #   end
 
 # Aziende predefinite
+
+ActiveRecord::Base.connection.truncate_tables(*ActiveRecord::Base.connection.tables)
+
+
 Company.create!(
   name: "a"
 )

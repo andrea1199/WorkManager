@@ -18,7 +18,7 @@ gem "jquery-rails", "~> 4.6"
 gem "dartsass-sprockets", "~> 3.1"
 gem "omniauth-github"
 gem "omniauth-google-oauth2"
-gem 'omniauth-rails_csrf_protection'
+# gem 'omniauth-rails_csrf_protection'
 gem 'pg'
 gem 'popper_js', '~> 1.16.0'
 gem "webdrivers"

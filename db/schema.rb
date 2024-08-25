@@ -88,11 +88,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_07_154346) do
     t.string "cognome"
     t.date "data_di_nascita"
     t.text "descrizione"
-    t.string "ruolo", default: "0", null: false
+    t.string "ruolo", default: "dipendente"
     t.string "provider", limit: 50, default: "", null: false
     t.string "uid", limit: 50, default: "", null: false
-    t.bigint "company_id"
-    t.index ["company_id"], name: "index_users_on_company_id"
+    t.integer "company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -101,5 +100,4 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_07_154346) do
 
   add_foreign_key "day_schedulings", "users", column: "employee_id"
   add_foreign_key "salaires", "users", column: "employee_id"
-  add_foreign_key "users", "companies"
 end
