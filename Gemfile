@@ -10,6 +10,7 @@ gem "puma", ">= 5.0"
 gem "importmap-rails"
 gem "turbo-rails"
 gem "stimulus-rails"
+gem "omniauth-rails_csrf_protection" 
 
 gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
