@@ -19,7 +19,7 @@
             <td><%= dipendente.email %></td>
             <td><%= check_box_tag "user_ids[]", dipendente.id %></td>
             <td>
-              <%= select_tag "users[#{dipendente.id}][company_id]", options_from_collection_for_select(Company.all, :id, :name, dipendente.company_id), include_blank: "Nessuna", class: 'form-control' %>
+            <%= select_tag "users[#{dipendente.id}][company_id]", "<option value='null'>Nessuna</option>".html_safe + options_from_collection_for_select(Company.all, :id, :name, dipendente.company_id), class: 'form-control' %>            
             </td>
           </tr>
         <% end %>
