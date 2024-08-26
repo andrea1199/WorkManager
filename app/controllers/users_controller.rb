@@ -41,12 +41,33 @@ class UsersController < ApplicationController
   end
 
   def promote_selected
-    # Aggiorna il ruolo dei dipendenti selezionati
-    User.where(id: params[:user_ids]).update_all(ruolo: 'dirigente')
-
+    user_ids = params[:user_ids] || []
+    user_data = params[:users] || {}
+  
+    user_data.each do |user_id, data|
+      user = User.find_by(id: user_id)
+      next unless user # Salta se l'utente non esiste
+  
+      user_updates = {}
+  
+      # Seleziona il nuovo ruolo solo se il checkbox è stato selezionato
+      if user_ids.include?(user_id)
+        user_updates[:ruolo] = 'dirigente' if user.ruolo != 'dirigente'
+      end
+  
+      # Seleziona la nuova azienda solo se è stata selezionata una diversa
+      if data[:company_id].present? && data[:company_id].to_i != user.company_id
+        user_updates[:company_id] = data[:company_id].to_i
+      end
+  
+      # Aggiorna l'utente solo se ci sono modifiche
+      user.update(user_updates) if user_updates.any?
+    end
+  
     redirect_to promote_confirm_users_path # Reindirizza alla pagina di conferma
   end
-
+  
+  
   def promote_confirm
     # Renderizza la pagina di conferma
   end

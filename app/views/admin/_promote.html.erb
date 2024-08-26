@@ -1,22 +1,26 @@
 <div class="container mt-5">
   <h2>Promuovi Dipendenti a Dirigenti</h2>
-  <%= form_with url: promote_selected_users_path, method: :post do %>
+  <%= form_with url: promote_selected_users_path, method: :post, local: true do %>
     <table class="table table-bordered">
       <thead>
         <tr>
           <th>Nome</th>
           <th>Cognome</th>
           <th>Email</th>
-          <th>Seleziona per Promozione</th>
+          <th>Promuovi a Dirigente</th>
+          <th>Compagnia</th>
         </tr>
       </thead>
       <tbody>
-        <% User.where(ruolo: 'dipendente').each do |dipendente| %>
+        <% User.where(ruolo: 'dipendente').order(:id).each do |dipendente| %>
           <tr>
             <td><%= dipendente.nome %></td>
             <td><%= dipendente.cognome %></td>
             <td><%= dipendente.email %></td>
-            <td><%= check_box_tag 'user_ids[]', dipendente.id %></td>
+            <td><%= check_box_tag "user_ids[]", dipendente.id %></td>
+            <td>
+              <%= select_tag "users[#{dipendente.id}][company_id]", options_from_collection_for_select(Company.all, :id, :name, dipendente.company_id), include_blank: "Nessuna", class: 'form-control' %>
+            </td>
           </tr>
         <% end %>
       </tbody>
