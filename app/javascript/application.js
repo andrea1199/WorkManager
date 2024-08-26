@@ -1,9 +1,3 @@
-import 'jquery3';
-import '@popperjs/core/dist/umd/popper';
-import 'bootstrap';
-import 'jquery_ujs';
-import 'font_awesome5';
-import 'signin';
-import '@fortawesome/fontawesome-free/js/all.js';
-
-import './show_selected_user_info';
+// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
+import "@hotwired/turbo-rails"
+import "controllers"
