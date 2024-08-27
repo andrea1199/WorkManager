@@ -29,10 +29,15 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # end
   require_relative '../../models/user.rb' # Add the missing import statement
 
+  def after_sign_up_path_for_github(resource)
+    '/users/registration/githubform'
+  end
+
   def github
     @user = User.create_from_provider_data(request.env['omniauth.auth'])
     if @user.persisted?
-      sign_in_and_redirect @user
+      after_sign_up_path_for_github(@user)
+      # sign_in_and_redirect @user
       set_flash_message(:notice, :success, kind: 'Github') if is_navigational_format?
     else
       flash[:error]='There was a problem signing you in through Github. Please register or try signing in later.'
