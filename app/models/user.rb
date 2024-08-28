@@ -2,6 +2,7 @@ class User < ApplicationRecord
 
   has_many :salaires, foreign_key: :employee_id, dependent: :destroy
   has_many :day_schedulings, foreign_key: 'employee_id', dependent: :destroy
+  has_many :holidays, dependent: :destroy
 
 
   devise :database_authenticatable, :registerable,

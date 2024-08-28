@@ -36,6 +36,8 @@ Rails.application.routes.draw do
 
   resources :dirigente, only: [:index, :show], controller: 'dirigente'
   resources :dipendente, only: [:index, :show]
+  resources :holidays, only: [:create]
+
 
   get 'admin', to: 'admin#index', as: 'admin_index'
   get 'dashboard', to: 'users#dashboard'
