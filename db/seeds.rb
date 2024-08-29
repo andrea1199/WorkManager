@@ -111,9 +111,6 @@ User.all.each do |user|
       employee_id: user.id                 # Associa l'orario di lavoro all'utente corrente
     )
   end
-<<<<<<< HEAD
-end
-=======
   # Aggiunta delle ferie per ogni utente
   User.all.each do |user|
     Holiday.create!(
@@ -123,4 +120,3 @@ end
     )
   end
 end
->>>>>>> 88f956b (aggiunta funzionalità ferie dipendente, dirigente ed admin. (seed da rivedere per le ferie))
