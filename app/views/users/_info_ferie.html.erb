@@ -33,38 +33,6 @@
     <% end %>
   </div>
 </div>
-<<<<<<< HEAD
-<script>
-  function enableSaveLeaveButton() {
-    var daysTaken = document.getElementById('holiday_taken').value;
-    var daysLeft = document.getElementById('holiday_left').value;
-    var saveButton = document.getElementById('saveLeaveButton');
-
-    // Abilita il bottone solo se entrambi i campi hanno un valore
-    if (daysTaken !== "" && daysLeft !== "") {
-      saveButton.disabled = false;
-    } else {
-      saveButton.disabled = true;
-    }
-  }
-
-  function saveLeaveDays() {
-    var saveButton = document.getElementById('saveLeaveButton');
-
-    // Disabilita il bottone dopo che è stato cliccato
-    saveButton.disabled = true;
-
-    // Qui puoi aggiungere altro codice per salvare i dati tramite Ajax, se necessario
-  }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    var inputs = document.querySelectorAll('#leaveInfo input[type="number"]');
-    inputs.forEach(function(input) {
-      input.addEventListener('input', enableSaveLeaveButton);
-    });
-  });
-</script>
-=======
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
@@ -104,4 +72,3 @@
   });
 </script>
 
->>>>>>> 88f956b (aggiunta funzionalità ferie dipendente, dirigente ed admin. (seed da rivedere per le ferie))
