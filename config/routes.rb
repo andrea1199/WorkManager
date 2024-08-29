@@ -32,6 +32,11 @@ Rails.application.routes.draw do
       post 'retrocedi_selected', to: 'users#retrocedi_selected'
       get 'retrocedi_confirm', to: 'users#retrocedi_confirm', as: 'retrocedi_confirm'
     end
+
+    member do
+      get 'holidays', to: 'users#show_holidays'
+      post 'holidays/update', to: 'users#update_holidays', as: 'update_holidays'
+    end
   end
 
   resources :dirigente, only: [:index, :show], controller: 'dirigente'

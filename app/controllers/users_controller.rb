@@ -7,6 +7,18 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
+  def show_holidays
+    @holidays = @user.holidays
+  end
+
+  def update_holidays
+    params[:holidays].each do |index, holiday_params|
+      holiday = current_user.holidays.find(holiday_params[:id])
+      holiday.update(taken: holiday_params[:taken], left: holiday_params[:left])
+    end
+    redirect_to holidays_user_path, notice: 'Ferie aggiornate con successo.'
+  end
+
   def update
     if current_user.update(user_params)
       redirect_to confirm_users_path # Reindirizza alla pagina di conferma

@@ -2,7 +2,12 @@ class User < ApplicationRecord
 
   has_many :salaires, foreign_key: :employee_id, dependent: :destroy
   has_many :day_schedulings, foreign_key: 'employee_id', dependent: :destroy
+<<<<<<< HEAD
   has_many :holidays, dependent: :destroy
+=======
+  has_many :holidays, foreign_key: :employee_id, dependent: :destroy
+
+>>>>>>> 88f956b (aggiunta funzionalità ferie dipendente, dirigente ed admin. (seed da rivedere per le ferie))
 
 
   devise :database_authenticatable, :registerable,
