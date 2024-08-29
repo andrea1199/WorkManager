@@ -1,0 +1,27 @@
+<!-- app/views/admin/user_details.html.erb -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 border-right">
+          <h3>Dettagli per: <%= user.nome %></h3>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 border-right"></div>
+      <div class="col-md-4" id="workSchedule">
+        <%= render 'admin/orarioLavoro', user: user %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 border-right"></div>
+      <div class="col-md-4" id="leaveInfo">
+        <%= render 'admin/infoFerie', user: user %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 border-right"></div>
+      <div class="col-md-4" id="salaryInfo">
+        <%= render 'admin/infoStipendio', user: user %>
+        <a href="/"><button class="btn btn-primary mt-2">Torna alla home</button></a>
+      </div>
+    </div>
+</div>

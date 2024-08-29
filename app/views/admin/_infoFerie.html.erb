@@ -1,33 +1,31 @@
 <div class="col-md-8" id="holidayInfo">
   <div class="col-md-16">
     <h2>Ferie del Dipendente</h2>
-    <% if user.holidays.present? %>
-<%= form_with(model: user, url: update_holidays_user_path(user), method: :post, local: true, id: "holidays_form") do |f| %>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Giorni Presi</th>
-        <th scope="col">Giorni Rimasti</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% user.holidays.each_with_index do |holiday, index| %>
-        <tr>
-          <td>
-            <%= f.number_field :holidays_taken, value: holiday.taken, name: "holidays[#{index}][taken]", class: "form-control holiday-input" %>
-          </td>
-          <td>
-            <%= f.number_field :holidays_left, value: holiday.left, name: "holidays[#{index}][left]", class: "form-control holiday-input" %>
-          </td>
-          <input type="hidden" name="holidays[<%= index %>][id]" value="<%= holiday.id %>">
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <%= f.submit 'Aggiorna Ferie', class: 'btn btn-primary', disabled: true, id: "submit_button" %>
-<% end %>
-
-
+    <% if current_user.holidays.present? %>
+    <%= form_with(model: current_user, url: update_holidays_user_path(current_user), method: :post, local: true, id: "holidays_form") do |f| %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Giorni Presi</th>
+            <th scope="col">Giorni Rimasti</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% current_user.holidays.each_with_index do |holiday, index| %>
+            <tr>
+              <td>
+                <%= f.number_field :holidays_taken, value: holiday.taken, name: "holidays[#{index}][taken]", class: "form-control holiday-input" %>
+              </td>
+              <td>
+                <%= f.number_field :holidays_left, value: holiday.left, name: "holidays[#{index}][left]", class: "form-control holiday-input" %>
+              </td>
+              <input type="hidden" name="holidays[<%= index %>][id]" value="<%= holiday.id %>">
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= f.submit 'Aggiorna Ferie', class: 'btn btn-primary', disabled: true, id: "submit_button" %>
+    <% end %>
     <% else %>
       <p>Nessuna informazione sulle ferie disponibile.</p>
     <% end %>
@@ -64,11 +62,7 @@
     inputs.forEach(input => {
       input.addEventListener('input', checkForChanges);
     });
-
-    // Disabilita il pulsante dopo l'invio del form
-    form.addEventListener('submit', function() {
-      submitButton.disabled = true;
-    });
   });
 </script>
+
 
