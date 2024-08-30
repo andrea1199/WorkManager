@@ -29,9 +29,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # end
   require_relative '../../models/user.rb' # Add the missing import statement
 
-  def after_sign_up_path_for_github(resource)
-    '/users/registration/githubform'
-  end
 
   def github
     @user = User.create_from_provider_data(request.env['omniauth.auth'])
