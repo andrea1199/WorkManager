@@ -90,6 +90,7 @@ class UsersController < ApplicationController
   def show_selected_user_info
     @user = User.find(params[:user_id])
     @salaires = @user.salaires.order(date: :asc)
+    
     if current_user.dirigente?
       render 'dirigente/dipendente', locals: { user: @user }
     elsif current_user.admin?
@@ -98,6 +99,7 @@ class UsersController < ApplicationController
       redirect_to root_path, alert: "Non autorizzato a visualizzare queste informazioni."
     end
   end
+  
 
   def complete_profile
     @user = current_user

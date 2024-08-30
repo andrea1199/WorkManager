@@ -30,24 +30,17 @@ class DaySchedulingController < ApplicationController
     end
 
     def update_day_scheduling
-        if current_user.ruolo != "dipendente"
-            params[:work_schedules].each do |day, times|
-                schedule = current_user.day_schedulings.find_or_initialize_by(date: Date.parse(day.capitalize))
-      
-                if times[:start_work].present? && times[:end_work].present?
-                  schedule.update(
-                   start_work: Time.zone.parse(times[:start_work]),
-                    end_work: Time.zone.parse(times[:end_work])
-                  )
-                end
-            end
-            flash[:success] = "Orario di lavoro aggiornato con successo."
-        else
-          flash[:error] = "Non hai i permessi per modificare l'orario di lavoro."
+        user = User.find(params[:user_id])
+        # Presupponendo che il formato dei dati sia corretto
+        params[:work_schedules].each do |day, schedule|
+          day_scheduling = user.day_schedulings.find_or_initialize_by(date: Date.parse(day.capitalize))
+          day_scheduling.start_work = schedule[:start_work]
+          day_scheduling.end_work = schedule[:end_work]
+          day_scheduling.save!
         end
-        redirect_to day_schedulings_path(current_user)
-    end
-
+        redirect_to user_path(user), notice: 'Orario di lavoro aggiornato con successo.'
+      end
+      
     private
 
     def day_scheduling_params

@@ -1,7 +1,8 @@
 <div class="col-md-8" id="workSchedule">
   <div class="col-md-16">
     <h2>Orario di Lavoro</h2>
-    <%= form_with url: update_day_scheduling_path, method: :patch do %>
+    <%= form_with url: update_day_scheduling_path, method: :patch do |f| %>
+      <%= hidden_field_tag :user_id, user.id %>
       <table class="table">
         <thead>
           <tr>
@@ -11,7 +12,7 @@
           </tr>
         </thead>
         <tbody>
-          <% work_schedules = current_user.day_schedulings.group_by { |ds| ds.date.strftime('%A') } %>
+          <% work_schedules = user.day_schedulings.group_by { |ds| ds.date.strftime('%A') } %>
           <% ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].each do |day| %>
             <tr>
               <td><%= day %></td>
@@ -40,4 +41,3 @@
     <% end %>
   </div>
 </div>
-
