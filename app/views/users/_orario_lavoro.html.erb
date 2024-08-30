@@ -1,42 +1,43 @@
 <div class="col-md-8" id="workSchedule">
   <div class="col-md-16">
     <h2>Orario di Lavoro</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Giorno</th>
-          <th scope="col">Ingresso</th>
-          <th scope="col">Uscita</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% work_schedules = current_user.day_schedulings.group_by { |ds| ds.date.strftime('%A') } %>
-        <tr>
-          <td>Lunedì</td>
-          <td id="mondayEntry"><%= work_schedules['Monday']&.first&.start_work&.strftime('%H:%M') || 'N/A' %></td>
-          <td id="mondayExit"><%= work_schedules['Monday']&.first&.end_work&.strftime('%H:%M') || 'N/A' %></td>
-        </tr>
-        <tr>
-          <td>Martedì</td>
-          <td id="tuesdayEntry"><%= work_schedules['Tuesday']&.first&.start_work&.strftime('%H:%M') || 'N/A' %></td>
-          <td id="tuesdayExit"><%= work_schedules['Tuesday']&.first&.end_work&.strftime('%H:%M') || 'N/A' %></td>
-        </tr>
-        <tr>
-          <td>Mercoledì</td>
-          <td id="wednesdayEntry"><%= work_schedules['Wednesday']&.first&.start_work&.strftime('%H:%M') || 'N/A' %></td>
-          <td id="wednesdayExit"><%= work_schedules['Wednesday']&.first&.end_work&.strftime('%H:%M') || 'N/A' %></td>
-        </tr>
-        <tr>
-          <td>Giovedì</td>
-          <td id="thursdayEntry"><%= work_schedules['Thursday']&.first&.start_work&.strftime('%H:%M') || 'N/A' %></td>
-          <td id="thursdayExit"><%= work_schedules['Thursday']&.first&.end_work&.strftime('%H:%M') || 'N/A' %></td>
-        </tr>
-        <tr>
-          <td>Venerdì</td>
-          <td id="fridayEntry"><%= work_schedules['Friday']&.first&.start_work&.strftime('%H:%M') || 'N/A' %></td>
-          <td id="fridayExit"><%= work_schedules['Friday']&.first&.end_work&.strftime('%H:%M') || 'N/A' %></td>
-        </tr>
-      </tbody>
-    </table>
+    <%= form_with url: update_day_scheduling_path, method: :patch do %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Giorno</th>
+            <th scope="col">Ingresso</th>
+            <th scope="col">Uscita</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% work_schedules = current_user.day_schedulings.group_by { |ds| ds.date.strftime('%A') } %>
+          <% ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].each do |day| %>
+            <tr>
+              <td><%= day %></td>
+              <% if current_user.ruolo != "dipendente" %>
+                <td>
+                  <input type="time" name="work_schedules[<%= day.downcase %>][start_work]" 
+                         value="<%= work_schedules[day]&.first&.start_work&.strftime('%H:%M') || '' %>">
+                </td>
+                <td>
+                  <input type="time" name="work_schedules[<%= day.downcase %>][end_work]" 
+                         value="<%= work_schedules[day]&.first&.end_work&.strftime('%H:%M') || '' %>">
+                </td>
+              <% else %>
+                <td><%= work_schedules[day]&.first&.start_work&.strftime('%H:%M') || 'N/A' %></td>
+                <td><%= work_schedules[day]&.first&.end_work&.strftime('%H:%M') || 'N/A' %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <% if current_user.ruolo != "dipendente" %>
+        <div class="form-group">
+          <%= submit_tag 'Salva Modifiche', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 </div>
+

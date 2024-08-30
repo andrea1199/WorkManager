@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   resources :companies
   resources :day_schedulings
+  patch '/update_day_scheduling', to: 'day_scheduling#update_day_scheduling', as: 'update_day_scheduling'
+
   resources :salaires
 
   resources :users do
@@ -50,6 +52,7 @@ Rails.application.routes.draw do
   get 'admin', to: 'admin#index', as: 'admin_index'
   get 'dashboard', to: 'users#dashboard'
   patch 'user_update', to: 'users#update'
+
 
   get 'aziende', to: 'companies#index', as: 'aziende_index'
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
