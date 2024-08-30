@@ -30,7 +30,7 @@ User.create!(
   ruolo: "dipendente",
   data_di_nascita: "1990-01-01",
   descrizione: "sono un dipendente",
-  company_id: 1
+  company_id: Company.find_by(name: "a").id
 )
 
 User.create!(
@@ -41,7 +41,7 @@ User.create!(
   ruolo: "dipendente",
   data_di_nascita: "1990-01-01",
   descrizione: "sono un dipendente",
-  company_id: 2
+  company_id: Company.find_by(name: "b").id
 )
 
 User.create!(
@@ -52,7 +52,7 @@ User.create!(
   ruolo: "dirigente",
   data_di_nascita: "1990-01-01",
   descrizione: "sono un dirigente",
-  company_id: 1
+  company_id: Company.find_by(name: "a").id
 )
 
 User.create!(
@@ -63,7 +63,7 @@ User.create!(
   ruolo: "dirigente",
   data_di_nascita: "1990-01-01",
   descrizione: "sono un dirigente",
-  company_id: 2
+  company_id: Company.find_by(name: "b").id
 )
 
 User.create!(
@@ -74,7 +74,7 @@ User.create!(
   ruolo: "admin",
   data_di_nascita: "1990-01-01",
   descrizione: "sono un admin",
-  company_id: 1
+  company_id: Company.find_by(name: "a").id
 )
 
 User.create!(
@@ -85,7 +85,7 @@ User.create!(
   ruolo: "admin",
   data_di_nascita: "1990-01-01",
   descrizione: "sono un admin",
-  company_id: 2
+  company_id: Company.find_by(name: "b").id
 )
 
 # Aggiunta degli stipendi per ogni utente

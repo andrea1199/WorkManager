@@ -24,45 +24,10 @@
           <% end %>
         </tbody>
       </table>
-      <%= f.submit 'Aggiorna Ferie', class: 'btn btn-primary', disabled: true, id: "submit_button" %>
+      <%= f.submit 'Aggiorna Ferie', class: 'btn btn-primary', id: "submit_button" %>
     <% end %>
     <% else %>
       <p>Nessuna informazione sulle ferie disponibile.</p>
     <% end %>
   </div>
 </div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const form = document.getElementById('holidays_form');
-    const inputs = document.querySelectorAll('.holiday-input');
-    const submitButton = document.getElementById('submit_button');
-    
-    let originalValues = {};
-
-    // Salva i valori iniziali degli input
-    inputs.forEach(input => {
-      originalValues[input.name] = input.value;
-    });
-
-    // Funzione per controllare se ci sono state modifiche
-    function checkForChanges() {
-      let isChanged = false;
-
-      inputs.forEach(input => {
-        if (input.value !== originalValues[input.name]) {
-          isChanged = true;
-        }
-      });
-
-      submitButton.disabled = !isChanged;
-    }
-
-    // Ascolta gli eventi di modifica degli input
-    inputs.forEach(input => {
-      input.addEventListener('input', checkForChanges);
-    });
-  });
-</script>
-
-

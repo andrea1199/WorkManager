@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_action :set_user
   before_action :authenticate_user!
   before_action :authorize_admin, only: [:promote, :promote_selected]
+  before_action :set_user, only: [:show_holidays, :update_holidays]
+
 
   def dashboard
     @user = current_user
@@ -12,11 +14,11 @@ class UsersController < ApplicationController
   end
 
   def update_holidays
-    params[:holidays].each do |index, holiday_params|
-      holiday = current_user.holidays.find(holiday_params[:id])
-      holiday.update(taken: holiday_params[:taken], left: holiday_params[:left])
+    holidays_params.each do |holiday_param|
+      holiday = @user.holidays.find(holiday_param[:id])
+      holiday.update(taken: holiday_param[:taken], left: holiday_param[:left])
     end
-    redirect_to holidays_user_path, notice: 'Ferie aggiornate con successo.'
+    redirect_to holidays_user_path(@user), notice: 'Ferie aggiornate con successo.'
   end
 
   def update
@@ -119,11 +121,18 @@ class UsersController < ApplicationController
     params.require(:user).permit(:nome, :cognome, :data_di_nascita, :descrizione, :ruolo, :company_id)
   end
 
-  def set_user
-    @user = current_user
-  end
-
   def authorize_admin
     redirect_to root_path, alert: "Non sei autorizzato ad accedere a questa sezione." unless current_user.admin? || current_user.dirigente?
+  end
+
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def holidays_params
+    params.require(:holidays).values.map do |holiday_param|
+      holiday_param.permit(:id, :taken, :left)
+    end
   end
 end  
