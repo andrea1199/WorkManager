@@ -97,10 +97,26 @@ class UsersController < ApplicationController
     end
   end
 
+  def complete_profile
+    @user = current_user
+    render 'users/omniauth_callbacks/github' # Specifica la vista esistente
+  end
+
+  def update_profile
+    @user = current_user
+    if @user.update(user_params)
+      flash[:notice] = 'Profile updated successfully.'
+      redirect_to root_path # Reindirizza alla home o a un'altra pagina
+    else
+      flash[:error] = 'There was a problem updating your profile.'
+      render :complete_profile
+    end
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:email, :descrizione)
+    params.require(:user).permit(:nome, :cognome, :data_di_nascita, :descrizione, :ruolo, :company_id)
   end
 
   def set_user

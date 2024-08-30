@@ -31,6 +31,9 @@ Rails.application.routes.draw do
       get 'retrocedi', to: 'users#retrocedi', as: 'retrocedi'
       post 'retrocedi_selected', to: 'users#retrocedi_selected'
       get 'retrocedi_confirm', to: 'users#retrocedi_confirm', as: 'retrocedi_confirm'
+      get 'complete_profile', to: 'users#complete_profile', as: 'complete_profile'
+      patch 'update_profile', to: 'users#update_profile', as: 'update_profile'
+
     end
 
     member do
