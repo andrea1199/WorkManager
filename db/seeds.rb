@@ -10,13 +10,16 @@
 
 # Aziende predefinite
 
-# Aziende predefinite
-
 ActiveRecord::Base.connection.truncate_tables(*ActiveRecord::Base.connection.tables)
 
-# Crea le aziende e salva i loro ID
-company_a = Company.create!(name: "a")
-company_b = Company.create!(name: "b")
+
+Company.create!(
+  name: "a"
+)
+Company.create!(
+  name: "b"
+)
+
 
 # Utenti predefiniti
 User.create!(
@@ -27,7 +30,7 @@ User.create!(
   ruolo: "dipendente",
   data_di_nascita: "1990-01-01",
   descrizione: "sono un dipendente",
-  company_id: company_a.id  # Associa il dipendente all'azienda "a"
+  company_id: 1
 )
 
 User.create!(
@@ -38,7 +41,7 @@ User.create!(
   ruolo: "dipendente",
   data_di_nascita: "1990-01-01",
   descrizione: "sono un dipendente",
-  company_id: company_b.id  # Associa il dipendente all'azienda "b"
+  company_id: 2
 )
 
 User.create!(
@@ -49,7 +52,7 @@ User.create!(
   ruolo: "dirigente",
   data_di_nascita: "1990-01-01",
   descrizione: "sono un dirigente",
-  company_id: company_a.id  # Associa il dirigente all'azienda "a"
+  company_id: 1
 )
 
 User.create!(
@@ -60,7 +63,7 @@ User.create!(
   ruolo: "dirigente",
   data_di_nascita: "1990-01-01",
   descrizione: "sono un dirigente",
-  company_id: company_b.id  # Associa il dirigente all'azienda "b"
+  company_id: 2
 )
 
 User.create!(
@@ -71,7 +74,7 @@ User.create!(
   ruolo: "admin",
   data_di_nascita: "1990-01-01",
   descrizione: "sono un admin",
-  company_id: company_a.id  # Associa l'admin all'azienda "a"
+  company_id: 1
 )
 
 User.create!(
@@ -82,7 +85,7 @@ User.create!(
   ruolo: "admin",
   data_di_nascita: "1990-01-01",
   descrizione: "sono un admin",
-  company_id: company_b.id  # Associa l'admin all'azienda "b"
+  company_id: 2
 )
 
 # Aggiunta degli stipendi per ogni utente
@@ -111,12 +114,15 @@ User.all.each do |user|
       employee_id: user.id                 # Associa l'orario di lavoro all'utente corrente
     )
   end
-  # Aggiunta delle ferie per ogni utente
-  User.all.each do |user|
-    Holiday.create!(
-      taken: rand(0..10),                  # Numero di ferie prese (casuale tra 0 e 10)
-      left: rand(10..30),                  # Numero di ferie rimanenti (casuale tra 10 e 30)
-      employee_id: user.id                 # Associa le ferie all'utente corrente
-    )
-  end
 end
+
+
+# Aggiunta delle vacanze per ogni utente
+User.all.each do |user|
+  Holiday.create!(
+    taken: rand(0..15),
+    left: rand(0..30),
+    employee_id: user.id
+  )
+end
+

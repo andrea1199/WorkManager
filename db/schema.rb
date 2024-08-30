@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_29_092820) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_26_121219) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,13 +53,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_29_092820) do
     t.index ["employee_id", "day_scheduling_id"], name: "index_employees_day_Schedulings_on_employee"
   end
 
-  create_table "employees_holidays", id: false, force: :cascade do |t|
-    t.bigint "employee_id", null: false
-    t.bigint "holiday_id", null: false
-    t.index ["employee_id", "holiday_id"], name: "index_employees_holidays_on_employee"
-    t.index ["holiday_id", "employee_id"], name: "index_employees_holidays_on_holidays"
-  end
-
   create_table "employees_salaires", id: false, force: :cascade do |t|
     t.bigint "employee_id", null: false
     t.bigint "salaire_id", null: false
@@ -70,12 +63,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_29_092820) do
   create_table "holidays", force: :cascade do |t|
     t.integer "taken"
     t.integer "left"
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "employee_id", null: false
     t.index ["employee_id"], name: "index_holidays_on_employee_id"
-    t.index ["user_id"], name: "index_holidays_on_user_id"
   end
 
   create_table "salaires", force: :cascade do |t|
@@ -117,7 +108,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_29_092820) do
   end
 
   add_foreign_key "day_schedulings", "users", column: "employee_id"
-  add_foreign_key "holidays", "users"
   add_foreign_key "holidays", "users", column: "employee_id"
   add_foreign_key "salaires", "users", column: "employee_id"
 end
