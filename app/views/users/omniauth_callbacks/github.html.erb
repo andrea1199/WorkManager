@@ -1,1 +1,38 @@
-ciao
+<!-- app/views/users/complete_profile.html.erb -->
+<h1>Complete your profile</h1>
+
+<%= form_for(@user, url: update_profile_users_path, method: :patch) do |f| %>
+  <div>
+    <%= f.label :nome %>
+    <%= f.text_field :nome %>
+  </div>
+
+  <div>
+    <%= f.label :cognome %>
+    <%= f.text_field :cognome %>
+  </div>
+
+  <div>
+    <%= f.label :data_di_nascita %>
+    <%= f.date_field :data_di_nascita %>
+  </div>
+
+  <div>
+    <%= f.label :descrizione %>
+    <%= f.text_area :descrizione %>
+  </div>
+
+  <div>
+    <%= f.label :ruolo %>
+    <%= f.select :ruolo, options_for_select(['admin', 'dirigente', 'dipendente'], @user.ruolo) %>
+  </div>
+
+  <div>
+    <%= f.label :company_id, "Compagnia" %>
+    <%= f.collection_select :company_id, Company.all, :id, :name, prompt: "Seleziona una compagnia" %>
+  </div>
+
+  <div>
+    <%= f.submit "Update Profile" %>
+  </div>
+<% end %>

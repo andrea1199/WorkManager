@@ -1,10 +1,68 @@
-<div class="col-md-8" id="leaveInfo">
-    <h2>Informazioni Ferie</h2>
-    <div class="form-group">
-        <label for="daysTaken">Giorni presi:</label>
-        <input type="number" class="form-control" id="daysTaken" oninput="enableSaveLeaveButton()">
-        <label for="daysLeft">Giorni rimasti:</label>
-        <input type="number" class="form-control" id="daysLeft" oninput="enableSaveLeaveButton()">
-    </div>
-    <button id="saveLeaveButton" class="btn btn-success mt-2 ml-2" onclick="saveLeaveDays()" disabled>Salva</button>
+<div class="col-md-8" id="holidayInfo">
+  <div class="col-md-16">
+    <h2>Ferie del Dipendente</h2>
+    <% if current_user.holidays.present? %>
+    <%= form_with(model: current_user, url: update_holidays_user_path(current_user), method: :post, local: true, id: "holidays_form") do |f| %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Giorni Presi</th>
+            <th scope="col">Giorni Rimasti</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% current_user.holidays.each_with_index do |holiday, index| %>
+            <tr>
+              <td>
+                <%= f.number_field :holidays_taken, value: holiday.taken, name: "holidays[#{index}][taken]", class: "form-control holiday-input" %>
+              </td>
+              <td>
+                <%= f.number_field :holidays_left, value: holiday.left, name: "holidays[#{index}][left]", class: "form-control holiday-input" %>
+              </td>
+              <input type="hidden" name="holidays[<%= index %>][id]" value="<%= holiday.id %>">
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= f.submit 'Aggiorna Ferie', class: 'btn btn-primary', disabled: true, id: "submit_button" %>
+    <% end %>
+    <% else %>
+      <p>Nessuna informazione sulle ferie disponibile.</p>
+    <% end %>
+  </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById('holidays_form');
+    const inputs = document.querySelectorAll('.holiday-input');
+    const submitButton = document.getElementById('submit_button');
+    
+    let originalValues = {};
+
+    // Salva i valori iniziali degli input
+    inputs.forEach(input => {
+      originalValues[input.name] = input.value;
+    });
+
+    // Funzione per controllare se ci sono state modifiche
+    function checkForChanges() {
+      let isChanged = false;
+
+      inputs.forEach(input => {
+        if (input.value !== originalValues[input.name]) {
+          isChanged = true;
+        }
+      });
+
+      submitButton.disabled = !isChanged;
+    }
+
+    // Ascolta gli eventi di modifica degli input
+    inputs.forEach(input => {
+      input.addEventListener('input', checkForChanges);
+    });
+  });
+</script>
+
+

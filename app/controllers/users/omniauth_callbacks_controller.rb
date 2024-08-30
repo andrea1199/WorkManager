@@ -29,21 +29,24 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # end
   require_relative '../../models/user.rb' # Add the missing import statement
 
-  def after_sign_up_path_for_github(resource)
-    '/users/registration/githubform'
-  end
 
   def github
     @user = User.create_from_provider_data(request.env['omniauth.auth'])
+    
     if @user.persisted?
-      after_sign_up_path_for_github(@user)
-      # sign_in_and_redirect @user
-      set_flash_message(:notice, :success, kind: 'Github') if is_navigational_format?
+      sign_in @user  # Autentica l'utente
+      if missing_user_info?(@user)
+        redirect_to complete_profile_users_path # Reindirizza l'utente al form di completamento del profilo
+      else
+        redirect_to root_path
+        set_flash_message(:notice, :success, kind: 'Github') if is_navigational_format?
+      end
     else
-      flash[:error]='There was a problem signing you in through Github. Please register or try signing in later.'
+      flash[:error] = 'There was a problem signing you in through Github. Please register or try signing in later.'
       redirect_to new_user_registration_url
     end
   end
+
   def google_oauth2
     @user = User.create_from_provider_data(request.env['omniauth.auth'])
     if @user.persisted?
@@ -65,4 +68,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     redirect_to new_user_registration_url
   end
 
+  private
+
+  def missing_user_info?(user)
+    user.nome.blank? || user.cognome.blank? || user.data_di_nascita.blank?
+  end
 end

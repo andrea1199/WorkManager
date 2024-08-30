@@ -7,6 +7,18 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
+  def show_holidays
+    @holidays = @user.holidays
+  end
+
+  def update_holidays
+    params[:holidays].each do |index, holiday_params|
+      holiday = current_user.holidays.find(holiday_params[:id])
+      holiday.update(taken: holiday_params[:taken], left: holiday_params[:left])
+    end
+    redirect_to holidays_user_path, notice: 'Ferie aggiornate con successo.'
+  end
+
   def update
     if current_user.update(user_params)
       redirect_to confirm_users_path # Reindirizza alla pagina di conferma
@@ -18,16 +30,13 @@ class UsersController < ApplicationController
   def confirm
     render 'users/confirm'
   end
-  
+
   def retrocedi
-    # Carica tutti i dipendenti
     @dipendenti = User.where(ruolo: 'dirigente')
   end
 
   def retrocedi_selected
-    # Aggiorna il ruolo dei dipendenti selezionati
     User.where(id: params[:user_ids]).update_all(ruolo: 'dipendente')
-
     redirect_to retrocedi_confirm_users_path # Reindirizza alla pagina di conferma
   end
 
@@ -36,71 +45,78 @@ class UsersController < ApplicationController
   end
 
   def promote
-    # Carica tutti i dipendenti
     @dipendenti = User.where(ruolo: 'dipendente')
   end
 
   def promote_selected
     user_ids = params[:user_ids] || []
     user_data = params[:users] || {}
-  
+
     user_data.each do |user_id, data|
       user = User.find_by(id: user_id)
       next unless user # Salta se l'utente non esiste
-  
+
       user_updates = {}
-  
-      # Seleziona il nuovo ruolo solo se il checkbox è stato selezionato
+
       if user_ids.include?(user_id)
         user_updates[:ruolo] = 'dirigente' if user.ruolo != 'dirigente'
       end
-  
-      # Seleziona la nuova azienda solo se è stata selezionata una diversa
+
       if data[:company_id].present? && data[:company_id].to_i != user.company_id
         user_updates[:company_id] = data[:company_id].to_i
       end
-  
-      # Aggiorna l'utente solo se ci sono modifiche
+
       user.update(user_updates) if user_updates.any?
     end
-  
+
     redirect_to promote_confirm_users_path # Reindirizza alla pagina di conferma
   end
-  
-  
+
   def promote_confirm
     # Renderizza la pagina di conferma
   end
 
   def index
-    if params[:ruolo].present?
-      @users = User.where(ruolo: params[:ruolo])
-    else
-      @users = []
-    end
+    @users = params[:ruolo].present? ? User.where(ruolo: params[:ruolo]) : []
   end
 
   def show
     @user = User.find(params[:id])
+    @holiday = @user.holidays.first_or_initialize # Carica le ferie esistenti o inizializza un nuovo oggetto Holiday
   end
 
   def show_selected_user_info
     @user = User.find(params[:user_id])
-    @salaires = @user.salaires.order(date: :asc) # Carica gli stipendi dell'utente
+    @salaires = @user.salaires.order(date: :asc)
     if current_user.dirigente?
-      render 'dirigente/dirigenteSuInfoPersonali', locals: { user: @user }
+      render 'dirigente/dipendente', locals: { user: @user }
     elsif current_user.admin?
       render 'admin/user_details', locals: { user: @user }
     else
       redirect_to root_path, alert: "Non autorizzato a visualizzare queste informazioni."
     end
   end
-  
-  
+
+  def complete_profile
+    @user = current_user
+    render 'users/omniauth_callbacks/github' # Specifica la vista esistente
+  end
+
+  def update_profile
+    @user = current_user
+    if @user.update(user_params)
+      flash[:notice] = 'Profile updated successfully.'
+      redirect_to root_path # Reindirizza alla home o a un'altra pagina
+    else
+      flash[:error] = 'There was a problem updating your profile.'
+      render :complete_profile
+    end
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:email, :descrizione)
+    params.require(:user).permit(:nome, :cognome, :data_di_nascita, :descrizione, :ruolo, :company_id)
   end
 
   def set_user
@@ -108,8 +124,6 @@ class UsersController < ApplicationController
   end
 
   def authorize_admin
-    unless current_user.admin? || current_user.dirigente?
-      redirect_to root_path, alert: "Non sei autorizzato ad accedere a questa sezione."
-    end
+    redirect_to root_path, alert: "Non sei autorizzato ad accedere a questa sezione." unless current_user.admin? || current_user.dirigente?
   end
-end
+end  

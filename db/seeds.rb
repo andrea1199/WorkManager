@@ -115,3 +115,14 @@ User.all.each do |user|
     )
   end
 end
+
+
+# Aggiunta delle vacanze per ogni utente
+User.all.each do |user|
+  Holiday.create!(
+    taken: rand(0..15),
+    left: rand(0..30),
+    employee_id: user.id
+  )
+end
+

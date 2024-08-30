@@ -31,11 +31,21 @@ Rails.application.routes.draw do
       get 'retrocedi', to: 'users#retrocedi', as: 'retrocedi'
       post 'retrocedi_selected', to: 'users#retrocedi_selected'
       get 'retrocedi_confirm', to: 'users#retrocedi_confirm', as: 'retrocedi_confirm'
+      get 'complete_profile', to: 'users#complete_profile', as: 'complete_profile'
+      patch 'update_profile', to: 'users#update_profile', as: 'update_profile'
+
+    end
+
+    member do
+      get 'holidays', to: 'users#show_holidays'
+      post 'holidays/update', to: 'users#update_holidays', as: 'update_holidays'
     end
   end
 
   resources :dirigente, only: [:index, :show], controller: 'dirigente'
   resources :dipendente, only: [:index, :show]
+  resources :holidays, only: [:create]
+
 
   get 'admin', to: 'admin#index', as: 'admin_index'
   get 'dashboard', to: 'users#dashboard'
