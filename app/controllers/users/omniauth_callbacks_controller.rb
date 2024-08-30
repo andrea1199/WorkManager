@@ -49,11 +49,18 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def google_oauth2
     @user = User.create_from_provider_data(request.env['omniauth.auth'])
+  
     if @user.persisted?
-      sign_in_and_redirect @user
-      set_flash_message(:notice, :success, kind: 'Google') if is_navigational_format?
+      sign_in @user  # Authenticate the user
+  
+      if missing_user_info?(@user)
+        redirect_to complete_profile_users_path # Redirect to the profile completion form if info is missing
+      else
+        redirect_to root_path
+        set_flash_message(:notice, :success, kind: 'Google') if is_navigational_format?
+      end
     else
-      flash[:error]='There was a problem signing you in through Google. Please register or try signing in later.'
+      flash[:error] = 'There was a problem signing you in through Google. Please register or try signing in later.'
       redirect_to new_user_registration_url
     end
   end
@@ -71,6 +78,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   private
 
   def missing_user_info?(user)
-    user.nome.blank? || user.cognome.blank? || user.data_di_nascita.blank?
+    user.nome.blank? || user.cognome.blank? || user.data_di_nascita.blank? || user.ruolo.blank? || user.company_id.blank?
   end
 end
