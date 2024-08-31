@@ -1,62 +1,75 @@
 class UsersController < ApplicationController
-  before_action :set_user
+  before_action :set_user, only: [:show, :show_selected_user_info, :update_holidays]
   before_action :authenticate_user!
   before_action :authorize_admin, only: [:promote, :promote_selected]
-  before_action :set_user, only: [:show_holidays, :update_holidays]
-
-
+  
+  # Metodo per visualizzare la dashboard dell'utente corrente
   def dashboard
     @user = current_user
   end
 
+  # Metodo per visualizzare le ferie dell'utente
   def show_holidays
     @holidays = @user.holidays
   end
 
+  # Metodo per aggiornare le ferie dell'utente
   def update_holidays
     holidays_params.each do |holiday_param|
       holiday = @user.holidays.find(holiday_param[:id])
       holiday.update(taken: holiday_param[:taken], left: holiday_param[:left])
     end
-    redirect_to holidays_user_path(@user), notice: 'Ferie aggiornate con successo.'
+    redirect_to show_holidays_users_path(@user), notice: 'Ferie aggiornate con successo.'
   end
 
-  def update
-    if current_user.update(user_params)
-      redirect_to confirm_users_path # Reindirizza alla pagina di conferma
+  # Metodo per visualizzare le informazioni di un dipendente selezionato
+  def show_selected_user_info
+    @salaires = @user.salaires.order(date: :asc)
+
+    if @salaires.empty?
+      flash[:alert] = "Nessuna informazione sullo stipendio disponibile."
+    end
+
+    if current_user.dirigente?
+      render 'dirigente/dipendente', locals: { user: @user }
+    elsif current_user.admin?
+      render 'admin/user_details', locals: { user: @user }
     else
-      render 'users/dashboard'
+      redirect_to root_path, alert: "Non autorizzato a visualizzare queste informazioni."
     end
   end
 
-  def confirm
-    render 'users/confirm'
+  # Metodo per aggiornare il profilo dell'utente
+  def update_profile
+    @user = current_user
+    if @user.update(user_params)
+      flash[:notice] = 'Profilo aggiornato con successo.'
+      redirect_to root_path
+    else
+      flash[:error] = 'Errore durante l\'aggiornamento del profilo.'
+      render :complete_profile
+    end
   end
 
-  def retrocedi
-    @dipendenti = User.where(ruolo: 'dirigente')
-  end
-
-  def retrocedi_selected
-    User.where(id: params[:user_ids]).update_all(ruolo: 'dipendente')
-    redirect_to retrocedi_confirm_users_path # Reindirizza alla pagina di conferma
-  end
-
+  # Metodo per visualizzare la conferma di retrocessione
   def retrocedi_confirm
     # Renderizza la pagina di conferma
   end
 
-  def promote
-    @dipendenti = User.where(ruolo: 'dipendente')
+  # Metodo per retrocedere gli utenti selezionati
+  def retrocedi_selected
+    User.where(id: params[:user_ids]).update_all(ruolo: 'dipendente')
+    redirect_to retrocedi_confirm_users_path
   end
 
+  # Metodo per promuovere gli utenti selezionati
   def promote_selected
     user_ids = params[:user_ids] || []
     user_data = params[:users] || {}
 
     user_data.each do |user_id, data|
       user = User.find_by(id: user_id)
-      next unless user # Salta se l'utente non esiste
+      next unless user
 
       user_updates = {}
 
@@ -71,70 +84,51 @@ class UsersController < ApplicationController
       user.update(user_updates) if user_updates.any?
     end
 
-    redirect_to promote_confirm_users_path # Reindirizza alla pagina di conferma
+    redirect_to promote_confirm_users_path
   end
 
+  # Metodo per promuovere un utente
+  def promote
+    @dipendenti = User.where(ruolo: 'dipendente')
+  end
+
+  # Metodo per visualizzare la conferma di promozione
   def promote_confirm
     # Renderizza la pagina di conferma
   end
 
+  # Metodo per visualizzare la lista degli utenti
   def index
     @users = params[:ruolo].present? ? User.where(ruolo: params[:ruolo]) : []
   end
 
+  # Metodo per visualizzare i dettagli di un utente specifico
   def show
     @user = User.find(params[:id])
-    @holiday = @user.holidays.first_or_initialize # Carica le ferie esistenti o inizializza un nuovo oggetto Holiday
-  end
-
-  def show_selected_user_info
-    @user = User.find(params[:user_id])
-    @salaires = @user.salaires.order(date: :asc)
-    
-    if current_user.dirigente?
-      render 'dirigente/dipendente', locals: { user: @user }
-    elsif current_user.admin?
-      render 'admin/user_details', locals: { user: @user }
-    else
-      redirect_to root_path, alert: "Non autorizzato a visualizzare queste informazioni."
-    end
-  end
-  
-
-  def complete_profile
-    @user = current_user
-    render 'users/omniauth_callbacks/github' # Specifica la vista esistente
-  end
-
-  def update_profile
-    @user = current_user
-    if @user.update(user_params)
-      flash[:notice] = 'Profile updated successfully.'
-      redirect_to root_path # Reindirizza alla home o a un'altra pagina
-    else
-      flash[:error] = 'There was a problem updating your profile.'
-      render :complete_profile
-    end
+    @holiday = @user.holidays.first_or_initialize
   end
 
   private
 
+  # Imposta l'utente corrente per le azioni che richiedono un utente specifico
+  def set_user
+    @user = User.find(params[:user_id] || params[:id])
+  end
+
+  # Permette solo i parametri permessi per l'utente
   def user_params
     params.require(:user).permit(:nome, :cognome, :data_di_nascita, :descrizione, :ruolo, :company_id)
   end
 
-  def authorize_admin
-    redirect_to root_path, alert: "Non sei autorizzato ad accedere a questa sezione." unless current_user.admin? || current_user.dirigente?
-  end
-
-
-  def set_user
-    @user = User.find(params[:id])
-  end
-
+  # Permette solo i parametri permessi per le ferie
   def holidays_params
     params.require(:holidays).values.map do |holiday_param|
       holiday_param.permit(:id, :taken, :left)
     end
   end
-end  
+
+  # Autorizza solo gli amministratori e dirigenti
+  def authorize_admin
+    redirect_to root_path, alert: "Non sei autorizzato ad accedere a questa sezione." unless current_user.admin? || current_user.dirigente?
+  end
+end

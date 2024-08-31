@@ -46,7 +46,7 @@ Rails.application.routes.draw do
 
   resources :dirigente, only: [:index, :show], controller: 'dirigente'
   resources :dipendente, only: [:index, :show]
-  resources :holidays, only: [:create]
+  resources :holidays, only: [:create, :update]
 
 
   get 'admin', to: 'admin#index', as: 'admin_index'
