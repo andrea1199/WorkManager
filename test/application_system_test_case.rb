@@ -1,32 +1,34 @@
 ####################################### FOR CHROME #######################################
 
-require 'test_helper'
-require 'capybara/cuprite'
+require "test_helper"
+
+WINDOWS_HOST = `cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }'`.strip
+CHROMEDRIVER_URL = "http://#{WINDOWS_HOST}:59317/"
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
+  # driven_by :selenium, using: :chrome, screen_size: [1400, 1400]
   driven_by :selenium_remote_chrome
 
   Capybara.register_driver :selenium_remote_chrome do |app|
     options = Selenium::WebDriver::Chrome::Options.new
     options.add_argument('--start-maximized')
 
-    windows_host = `cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`.strip
-    chromedriver_url = "http://#{windows_host}:9515/"
-
     Capybara::Selenium::Driver.new(
       app,
       browser: :remote,
-      url: chromedriver_url,
-      capabilities: [options]
+      url: CHROMEDRIVER_URL
     )
   end
 
   Capybara.configure do |config|
+    # Match what's set for URL options in test.rb so we
+    # can test mailers that contain links.
     config.server_host = 'localhost'
     config.server_port = 3000
   end
-end
 
+
+end
 
 ####################################### FOR FIREFOX #######################################
 
