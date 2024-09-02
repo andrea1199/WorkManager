@@ -1,4 +1,4 @@
-class AddEmployeeIdToSalaire < ActiveRecord::Migration[7.1]
+class AddEmployeeIdToSalaires < ActiveRecord::Migration[7.1]
   def change
     add_reference :salaires, :employee, null: true, foreign_key: { to_table: :users}
   end
