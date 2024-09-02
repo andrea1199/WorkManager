@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   get 'pages/home'
   get 'chiSiamo', to: 'pages#chiSiamo'
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   devise_scope :user do
     get 'signin', to: 'users/sessions#new'
     get 'signout', to: 'users/sessions#destroy'
@@ -20,8 +19,6 @@ Rails.application.routes.draw do
   resources :companies
   resources :day_schedulings
   patch '/update_day_scheduling', to: 'day_scheduling#update_day_scheduling', as: 'update_day_scheduling'
-
-  resources :salaires
 
   resources :users do
     collection do
@@ -35,29 +32,26 @@ Rails.application.routes.draw do
       get 'retrocedi_confirm', to: 'users#retrocedi_confirm', as: 'retrocedi_confirm'
       get 'complete_profile', to: 'users#complete_profile', as: 'complete_profile'
       patch 'update_profile', to: 'users#update_profile', as: 'update_profile'
-
     end
-
+  
     member do
-      get 'holidays', to: 'users#show_holidays'
-      post 'holidays/update', to: 'users#update_holidays', as: 'update_holidays'
+      get 'holidays', to: 'holidays#show'
+      patch 'update_holidays', to: 'holidays#update', as: 'update_holidays'
     end
   end
-
+  
   resources :dirigente, only: [:index, :show], controller: 'dirigente'
   resources :dipendente, only: [:index, :show]
   resources :holidays, only: [:create, :update]
+  resources :salaries, only: [:show, :edit, :update]
+  patch 'salaire/update', to: 'salaire#update', as: 'update_salary'
+
 
 
   get 'admin', to: 'admin#index', as: 'admin_index'
   get 'dashboard', to: 'users#dashboard'
   patch 'user_update', to: 'users#update'
 
-
   get 'aziende', to: 'companies#index', as: 'aziende_index'
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
-  # Defines the root path route ("/")
-  # root "posts#index"
 end

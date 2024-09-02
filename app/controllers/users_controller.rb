@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :show_selected_user_info, :update_holidays]
+  before_action :set_user, only: [:show, :show_selected_user_info]
   before_action :authenticate_user!
   before_action :authorize_admin, only: [:promote, :promote_selected]
   
@@ -8,23 +8,10 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
-  # Metodo per visualizzare le ferie dell'utente
-  def show_holidays
-    @holidays = @user.holidays
-  end
-
-  # Metodo per aggiornare le ferie dell'utente
-  def update_holidays
-    holidays_params.each do |holiday_param|
-      holiday = @user.holidays.find(holiday_param[:id])
-      holiday.update(taken: holiday_param[:taken], left: holiday_param[:left])
-    end
-    redirect_to show_holidays_users_path(@user), notice: 'Ferie aggiornate con successo.'
-  end
-
   # Metodo per visualizzare le informazioni di un dipendente selezionato
   def show_selected_user_info
     @salaires = @user.salaires.order(date: :asc)
+    @holiday = @user.holidays.first_or_initialize
 
     if @salaires.empty?
       flash[:alert] = "Nessuna informazione sullo stipendio disponibile."
@@ -118,13 +105,6 @@ class UsersController < ApplicationController
   # Permette solo i parametri permessi per l'utente
   def user_params
     params.require(:user).permit(:nome, :cognome, :data_di_nascita, :descrizione, :ruolo, :company_id)
-  end
-
-  # Permette solo i parametri permessi per le ferie
-  def holidays_params
-    params.require(:holidays).values.map do |holiday_param|
-      holiday_param.permit(:id, :taken, :left)
-    end
   end
 
   # Autorizza solo gli amministratori e dirigenti
