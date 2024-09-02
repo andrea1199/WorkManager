@@ -1,6 +1,8 @@
-<div class="col-md-8" id="workSchedule">
-  <div class="col-md-16">
-    <h2>Orario di Lavoro</h2>
+<div id="workSchedule">
+  <div>
+  <div width:100%>  
+      <h2>Orario di Lavoro</h2>
+  </div>
     <%= form_with url: update_day_scheduling_path, method: :patch do |f| %>
       <%= hidden_field_tag :user_id, user.id %>
       <table class="table">

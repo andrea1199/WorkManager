@@ -4,30 +4,26 @@
             <div class="card p-4">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-4 border-right">
+                        <div>
                         <h3>Dettagli per: <%= current_user.nome %></h3>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 border-right"></div>
-                        <div class="col-md-4" id="workSchedule">
+                        <div id="workSchedule">
                             <%= render 'users/orario_lavoro', user: current_user %>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 border-right"></div>
-                        <div class="col-md-4" id="leaveInfo">
+                        <div id="leaveInfo">
                             <%= render 'users/info_ferie', user: current_user %>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 border-right"></div>
-                        <div class="col-md-4" id="salaryInfo">
+                        <div id="salaryInfo">
                             <%= render 'users/info_stipendio', user: current_user %>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 border-right"></div>
                         <div class="col-md-4">
                             <a href="/"><button class="btn btn-primary">Torna alla home</button></a>
                         </div>
