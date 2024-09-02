@@ -1,10 +1,10 @@
-<div id="salaryInfo">
+<div class="col-md-8" id="salaryInfo">
   <h2>Informazioni Stipendio</h2>
 
-  <% if @user.present? && @user.salaires.any? %>
+  <% if user.salaires.present? %>
     <select id="monthSelect" class="form-control mb-3" onchange="showSalaryInfo()">
       <option value="" disabled selected>Seleziona un mese</option>
-      <% @user.salaires.each do |salaire| %>
+      <% user.salaires.each do |salaire| %>
         <option value="<%= salaire.date.strftime('%Y-%m') %>"><%= salaire.date.strftime('%B %Y') %></option>
       <% end %>
     </select>
