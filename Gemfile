@@ -45,4 +45,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "cuprite"
+  gem 'rails-controller-testing'
 end

@@ -4,48 +4,46 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
+# test/fixtures/users.yml
+
+# test/fixtures/users.yml
+
+admin:
+  email: admin@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  nome: Admin
+  cognome: User
+  ruolo: admin
+  confirmed_at: <%= Time.now %>
+
+dirigente:
+  email: dirigente@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  nome: Dirigente
+  cognome: User
+  ruolo: dirigente
+  confirmed_at: <%= Time.now %>
+
+dipendente:
+  email: dipendente@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  nome: Dipendente
+  cognome: User
+  ruolo: dipendente
+  confirmed_at: <%= Time.now %>
+
 one:
- email: "john.doe@example.com"
- encrypted_password: "capezzolo"
- reset_password_token: 
- reset_password_sent_at: 
- remember_created_at: 
- confirmation_token: 
- confirmed_at: 
- confirmation_sent_at: 
- unconfirmed_email: 
- failed_attempts: 0
- unlock_token: 
- locked_at: 
- created_at: <%= 2.days.ago.to_date %>
- updated_at: <%= 1.days.ago.to_date %>
- nome: "John"
- cognome: "Doe"
- data_di_nascita: <%= 30.years.ago.to_date %>
- descrizione: "Una breve descrizione di John Doe."
- ruolo: "Utente"
- provider: "github"
- uid: "1234567890"
- company_id: "pluto"
+  email: one@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  nome: One
+  cognome: User
+  ruolo: dipendente
+  confirmed_at: <%= Time.now %>
 
 two:
- email: "john.saa@example.com"
- encrypted_password: "luppolo"
- reset_password_token: 
- reset_password_sent_at: 
- remember_created_at: 
- confirmation_token: 
- confirmed_at: 
- confirmation_sent_at: 
- unconfirmed_email: 
- failed_attempts: 0
- unlock_token: 
- locked_at: 
- created_at: <%= 2.days.ago.to_date %>
- updated_at: <%= Time.current.to_date %>
- nome: "martha"
- cognome: "paperino"
- data_di_nascita: <%= 12.years.ago.to_date %>
- descrizione: "Una breve descrizione di John Doe."
- ruolo: "Utente"
- company_id: "pippo"
+  email: two@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  nome: Two
+  cognome: User
+  ruolo: dipendente
+  confirmed_at: <%= Time.now %>
