@@ -9,22 +9,31 @@ class UsersController < ApplicationController
   end
 
   # Metodo per visualizzare le informazioni di un dipendente selezionato
-  def show_selected_user_info
-    @salaires = @user.salaires.order(date: :asc)
-    @holiday = @user.holidays.first_or_initialize
+ def show_selected_user_info
+  @user = User.find(params[:user_id]) # Assicurati che user_id sia presente e valido
+  month = params[:month].present? ? Date.parse(params[:month]) : Date.current.beginning_of_month
 
-    if @salaires.empty?
-      flash[:alert] = "Nessuna informazione sullo stipendio disponibile."
-    end
+  @salaires = @user.salaires.where(date: month.beginning_of_month..month.end_of_month).order(date: :asc)
+  @holiday = @user.holidays.first_or_initialize
 
-    if current_user.dirigente?
-      render 'dirigente/dipendente', locals: { user: @user }
-    elsif current_user.admin?
-      render 'admin/user_details', locals: { user: @user }
-    else
-      redirect_to root_path, alert: "Non autorizzato a visualizzare queste informazioni."
-    end
+  if @salaires.empty?
+    flash[:alert] = "Nessuna informazione sullo stipendio disponibile per il mese selezionato."
   end
+
+  if current_user.dirigente?
+    render 'dirigente/dipendente', locals: { user: @user }
+  elsif current_user.admin?
+    render 'admin/user_details', locals: { user: @user }
+  else
+    redirect_to root_path, alert: "Non autorizzato a visualizzare queste informazioni."
+  end
+rescue ActiveRecord::RecordNotFound
+  flash[:alert] = "Utente non trovato."
+  redirect_to root_path
+end
+
+  
+  
 
   # Metodo per aggiornare il profilo dell'utente
   def update_profile

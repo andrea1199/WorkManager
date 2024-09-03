@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row d-flex justify-content-center">
         <div class="card p-4">
-          <div class="col-md-4 border-right">
+          <div>
             <h2>Dipendenti</h2>
             <%= form_with url: show_selected_user_info_users_path, method: :get, target: "_blank" do |f| %>
               <% dipendenti = User.where(ruolo: 'dipendente', company_id: current_user.company_id).order(:nome) %>

@@ -37,14 +37,14 @@ Rails.application.routes.draw do
     member do
       get 'holidays', to: 'holidays#show'
       patch 'update_holidays', to: 'holidays#update', as: 'update_holidays'
+      patch 'update_salaire/:id', to: 'salaires#update', as: 'update_salaire'
     end
   end
   
   resources :dirigente, only: [:index, :show], controller: 'dirigente'
   resources :dipendente, only: [:index, :show]
   resources :holidays, only: [:create, :update]
-  resources :salaries, only: [:show, :edit, :update]
-  patch 'salaire/update', to: 'salaire#update', as: 'update_salary'
+  resources :salaires, only: [:show, :edit, :update]
 
 
 

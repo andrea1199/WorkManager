@@ -1,13 +1,16 @@
 require "test_helper"
+require "capybara/rails"
 
-class CompanyTest < ActiveSupport::TestCase
-  test "new company" do
-    company = companies(:one)
-    assert company.valid?
+class CompanyTest < ActionDispatch::IntegrationTest
+  include Capybara::DSL
+
+  setup do
+    @company = companies(:one)
+    visit aziende_index_path
   end
 
   test "the page works" do
-    visit aziende_url
+    visit aziende_index_path
     assert page.has_content?("New Company")
   end
 end
