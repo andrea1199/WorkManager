@@ -44,7 +44,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get show_selected_user_info_users_url, params: { user_id: 999 }
     assert_redirected_to root_path
     assert_equal 'Utente non trovato.', flash[:alert]
-  end
+  end  
 
   test 'should update profile with valid attributes' do
     patch update_profile_users_url, params: { user: { nome: 'Nuovo Nome' } }
@@ -54,18 +54,21 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should not update profile with invalid attributes' do
-    patch update_profile_users_url, params: { user: { email: 'invalid' } }
+    patch update_profile_users_url, params: { user: { nome: '' } } # Modifica in base alle validazioni del tuo modello
     assert_template :complete_profile
     assert_equal 'Errore durante l\'aggiornamento del profilo.', flash[:error]
   end
+  
 
   test 'should promote selected users as admin' do
     sign_in @admin
     dipendente = users(:dipendente)
     post promote_selected_users_url, params: { user_ids: [dipendente.id] }
     assert_redirected_to promote_confirm_users_path
-    assert_equal 'dirigente', dipendente.reload.ruolo
+    dipendente.reload
+    assert_equal 'dirigente', dipendente.ruolo
   end
+  
 
   test 'should retrocede selected users as admin' do
     sign_in @admin
