@@ -22,6 +22,7 @@ gem "omniauth-google-oauth2"
 gem 'pg'
 gem 'popper_js', '~> 1.16.0'
 gem "webdrivers"
+gem 'rspec'
 
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
 group :development, :test do
