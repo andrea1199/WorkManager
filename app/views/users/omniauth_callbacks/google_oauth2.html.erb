@@ -1,18 +1,6 @@
-<!-- app/views/users/complete_profile.html.erb -->
-
 <h1>Complete your profile</h1>
 
 <%= form_for(@user, url: update_profile_users_path, method: :patch) do |f| %>
-  <div>
-    <%= f.label :nome %>
-    <%= f.text_field :nome %>
-  </div>
-
-  <div>
-    <%= f.label :cognome %>
-    <%= f.text_field :cognome %>
-  </div>
-
   <div>
     <%= f.label :data_di_nascita %>
     <%= f.date_field :data_di_nascita %>
