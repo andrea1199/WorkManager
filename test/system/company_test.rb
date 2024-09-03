@@ -25,8 +25,7 @@ class CompanyTest < ApplicationSystemTestCase
     visit companies_path
     click_on "New company"
     fill_in "Name", with: "Company 1"
-    click_on "Back to companies"
-    click_on "Show this company"
+    click_on "Create Company"
     click_on "Edit this company"
     fill_in "Name", with: "Paperino"
     click_on "Update Company"
