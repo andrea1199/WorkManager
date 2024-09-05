@@ -1,0 +1,26 @@
+<div class="container mt-5">
+  <h2>Licenzia Dipendenti</h2>
+  <%= form_with url: licenzia_selected_users_path, method: :post, local: true do %>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Cognome</th>
+          <th>Email</th>
+          <th>Licenzia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% User.where(ruolo: 'dipendente').order(:id).each do |dipendente| %>
+          <tr>
+            <td><%= dipendente.nome %></td>
+            <td><%= dipendente.cognome %></td>
+            <td><%= dipendente.email %></td>
+            <td><%= check_box_tag "user_ids[]", dipendente.id %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= submit_tag 'Licenzia Selezionati', class: 'btn btn-danger' %>
+  <% end %>
+</div>
