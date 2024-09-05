@@ -33,19 +33,21 @@ Rails.application.routes.draw do
       get 'complete_profile', to: 'users#complete_profile', as: 'complete_profile'
       patch 'update_profile', to: 'users#update_profile', as: 'update_profile'
 
-      # Nuove rotte per la funzionalità di licenziamento
+      # Aggiunta delle rotte per soft delete, ripristino ed eliminazione definitiva
       get 'licenzia', to: 'users#licenzia', as: 'licenzia'
-      post 'licenzia_selected', to: 'users#licenzia_selected'
+      post 'licenzia_selected', to: 'users#licenzia_selected', as: 'licenzia_selected'
       get 'licenzia_confirm', to: 'users#licenzia_confirm', as: 'licenzia_confirm'
+      post 'restore', to: 'users#restore', as: 'restore'
+      delete 'destroy_permanently', to: 'users#destroy_permanently', as: 'destroy_permanently'
     end
-
+  
     member do
       get 'holidays', to: 'holidays#show'
       patch 'update_holidays', to: 'holidays#update', as: 'update_holidays'
       patch 'update_salaire/:id', to: 'salaires#update', as: 'update_salaire'
     end
   end
-
+  
   resources :dirigente, only: [:index, :show], controller: 'dirigente'
   resources :dipendente, only: [:index, :show]
   resources :holidays, only: [:create, :update]

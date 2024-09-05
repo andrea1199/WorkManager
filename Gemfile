@@ -23,6 +23,7 @@ gem 'pg'
 gem 'popper_js', '~> 1.16.0'
 gem "webdrivers"
 gem 'rspec'
+gem 'paranoia', '~> 2.4'
 
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
 group :development, :test do

@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :show_selected_user_info]
+  before_action :set_user, only: [:show, :show_selected_user_info, :restore, :destroy_permanently]
   before_action :authenticate_user!
-  before_action :authorize_admin, only: [:promote, :promote_selected, :retrocedi, :retrocedi_selected, :licenzia, :licenzia_selected]
-  
+  before_action :authorize_admin, only: [:promote, :promote_selected, :retrocedi_selected, :licenzia, :licenzia_selected, :restore, :destroy_permanently]
+
   # Metodo per visualizzare la dashboard dell'utente corrente
   def dashboard
     @user = current_user
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     flash[:alert] = "Utente non trovato."
     redirect_to root_path
   end
-  
+
   # Metodo per aggiornare il profilo dell'utente
   def update_profile
     @user = current_user
@@ -92,9 +92,33 @@ class UsersController < ApplicationController
 
   # Metodo per licenziare gli utenti selezionati
   def licenzia_selected
-    User.where(id: params[:user_ids]).destroy_all
+    # Stampa di debug per vedere i parametri ricevuti
+    puts params.inspect
+  
+    # Estrai gli ID per ogni azione
+    soft_delete_ids = params.dig(:user_ids, :soft_delete) || []
+    restore_ids = params.dig(:user_ids, :restore) || []
+    hard_delete_ids = params.dig(:user_ids, :hard_delete) || []
+  
+    # Gestisci la soft delete
+    if soft_delete_ids.any?
+      User.where(id: soft_delete_ids).update_all(deleted_at: Time.current)
+    end
+  
+    # Gestisci il ripristino
+    if restore_ids.any?
+      User.with_deleted.where(id: restore_ids).update_all(deleted_at: nil)
+    end
+  
+    # Gestisci l'eliminazione definitiva
+    if hard_delete_ids.any?
+      User.where(id: hard_delete_ids).each(&:really_destroy!)
+    end
+    
+    # Reindirizza alla pagina di conferma
     redirect_to licenzia_confirm_users_path
   end
+  
 
   # Metodo per visualizzare la pagina di licenziamento
   def licenzia
@@ -104,6 +128,24 @@ class UsersController < ApplicationController
   # Metodo per visualizzare la conferma di licenziamento
   def licenzia_confirm
     # Renderizza la pagina di conferma
+  end
+
+  # Metodo per ripristinare gli utenti soft deleted
+  def restore
+    if @user.deleted_at.present?
+      @user.update(deleted_at: nil)
+      flash[:notice] = "Utente ripristinato con successo."
+    else
+      flash[:alert] = "L'utente non è stato soft deleted."
+    end
+    redirect_to licenzia_path
+  end
+
+  # Metodo per eliminare definitivamente gli utenti
+  def destroy_permanently
+    @user.destroy
+    flash[:notice] = "Utente eliminato definitivamente."
+    redirect_to licenzia_path
   end
 
   # Metodo per visualizzare la lista degli utenti
@@ -134,4 +176,3 @@ class UsersController < ApplicationController
     redirect_to root_path, alert: "Non sei autorizzato ad accedere a questa sezione." unless current_user.admin? || current_user.dirigente?
   end
 end
-

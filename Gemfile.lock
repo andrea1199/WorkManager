@@ -197,6 +197,8 @@ GEM
       actionpack (>= 4.2)
       omniauth (~> 2.0)
     orm_adapter (0.5.0)
+    paranoia (2.6.4)
+      activerecord (>= 5.1, < 7.2)
     pg (1.5.7)
     popper_js (1.16.1)
     psych (5.1.2)
@@ -340,6 +342,7 @@ DEPENDENCIES
   omniauth-github
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
+  paranoia (~> 2.4)
   pg
   popper_js (~> 1.16.0)
   puma (>= 5.0)
