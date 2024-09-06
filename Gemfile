@@ -22,8 +22,9 @@ gem "omniauth-google-oauth2"
 gem 'pg'
 gem 'popper_js', '~> 1.16.0'
 gem "webdrivers"
-gem 'rspec'
 gem 'paranoia', '~> 2.4'
+gem 'rspec-rails'
+
 
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
 group :development, :test do
@@ -44,7 +45,11 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
+  gem 'cucumber-rails', require: false
   gem "selenium-webdriver"
   gem "cuprite"
   gem 'rails-controller-testing'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'database_cleaner'
 end
