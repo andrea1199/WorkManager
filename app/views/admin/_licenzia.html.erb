@@ -27,6 +27,9 @@
             <td><%= check_box_tag "user_ids[soft_delete][]", utente.id %></td>
             <td><%= check_box_tag "user_ids[restore][]", utente.id %></td>
             <td><%= check_box_tag "user_ids[hard_delete][]", utente.id %></td>
+            <%#    <td><%= radio_button_tag "user_action[#{utente.id}]", 'soft_delete' %></td>
+            <%#    <td><%= radio_button_tag "user_action[#{utente.id}]", 'restore' %></td>  
+            <%#    <td><%= radio_button_tag "user_action[#{utente.id}]", 'hard_delete' %></td>
           </tr>
         <% end %>
       </tbody>
