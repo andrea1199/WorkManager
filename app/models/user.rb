@@ -28,6 +28,12 @@ class User < ApplicationRecord
     end
   end
 
+  acts_as_paranoid
+
+  def status
+    deleted_at.present? ? "Disabilitato" : "Attivo"
+  end
+
   def admin?
     ruolo == 'admin'
   end

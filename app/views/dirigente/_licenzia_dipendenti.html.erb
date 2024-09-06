@@ -1,0 +1,36 @@
+<div class="container mt-5">
+  <h2>Licenzia Dipendenti</h2>
+  <%= form_with url: licenzia_selected_users_path, method: :post, local: true do %>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Cognome</th>
+          <th>Email</th>
+          <th>Stato</th>
+          <th>Soft Delete</th>
+          <th>Ripristina</th>
+          <th>Elimina Definitivamente</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% User.with_deleted.order(:id).where(ruolo: 'dipendente').each do |utente| %>
+          <tr>
+            <td><%= utente.nome %></td>
+            <td><%= utente.cognome %></td>
+            <td><%= utente.email %></td>
+            <td>
+              <span class="badge <%= utente.deleted_at.present? ? 'badge-secondary' : 'badge-primary' %>">
+                <%= utente.status %>
+              </span>
+            </td>
+            <td><%= check_box_tag "user_ids[soft_delete][]", utente.id %></td>
+            <td><%= check_box_tag "user_ids[restore][]", utente.id %></td>
+            <td><%= check_box_tag "user_ids[hard_delete][]", utente.id %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= submit_tag 'Applica Azioni', class: 'btn btn-primary' %>
+  <% end %>
+</div>

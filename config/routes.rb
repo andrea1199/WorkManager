@@ -32,6 +32,13 @@ Rails.application.routes.draw do
       get 'retrocedi_confirm', to: 'users#retrocedi_confirm', as: 'retrocedi_confirm'
       get 'complete_profile', to: 'users#complete_profile', as: 'complete_profile'
       patch 'update_profile', to: 'users#update_profile', as: 'update_profile'
+
+      # Aggiunta delle rotte per soft delete, ripristino ed eliminazione definitiva
+      get 'licenzia', to: 'users#licenzia', as: 'licenzia'
+      post 'licenzia_selected', to: 'users#licenzia_selected', as: 'licenzia_selected'
+      get 'licenzia_confirm', to: 'users#licenzia_confirm', as: 'licenzia_confirm'
+      post 'restore', to: 'users#restore', as: 'restore'
+      delete 'destroy_permanently', to: 'users#destroy_permanently', as: 'destroy_permanently'
     end
   
     member do
@@ -45,8 +52,6 @@ Rails.application.routes.draw do
   resources :dipendente, only: [:index, :show]
   resources :holidays, only: [:create, :update]
   resources :salaires, only: [:show, :edit, :update]
-
-
 
   get 'admin', to: 'admin#index', as: 'admin_index'
   get 'dashboard', to: 'users#dashboard'

@@ -10,6 +10,9 @@
         <li class="nav-item">
             <a class="nav-link" id="dipendenti-tab" data-toggle="tab" href="#dipendenti" role="tab" aria-controls="dipendenti" aria-selected="false">Dipendenti</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" id="licenzia-tab" data-toggle="tab" href="#licenzia" role="tab" aria-controls="licenzia" aria-selected="false">Licenzia Dipendenti</a>
+        </li>
         </ul>
 
         <div class="tab-content">
@@ -23,6 +26,10 @@
 
         <div class="tab-pane fade" id="dipendenti" role="tabpanel" aria-labelledby="dipendenti-tab">
             <%= render "dirigente/dirigenteSuDipendenti" %>
+        </div>
+
+        <div class="tab-pane fade" id="licenzia" role="tabpanel" aria-labelledby="licenzia-tab">
+            <%= render "dirigente/licenzia_dipendenti" %>
         </div>
 
         </div>
