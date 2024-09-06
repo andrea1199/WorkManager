@@ -15,7 +15,7 @@
       </thead>
       <tbody>
         <% User.with_deleted.order(:id).where.not(ruolo: 'admin').each do |utente| %>
-          <tr>
+          <tr id="user-<%= utente.id %>">
             <td><%= utente.nome %></td>
             <td><%= utente.cognome %></td>
             <td><%= utente.email %></td>
