@@ -88,41 +88,44 @@ User.create!(
   company_id: Company.find_by(name: "b").id
 )
 
-# Aggiunta degli stipendi per ogni utente
-User.all.each do |user|
-  # Genera 12 stipendi, uno per ogni mese del 2024
-  (1..12).each do |month|
-    Salaire.create!(
-      date: Date.new(2024, month, 1),   # La data dello stipendio: primo giorno di ogni mese
-      value: rand(2000..5000),          # Importo dello stipendio casuale tra 2000€ e 5000€
-      employee_id: user.id              # Associa lo stipendio all'utente corrente
-    )
-  end
-end
+############################################ SPOSTATI IN USER MODEL ############################################
+# # Creati alla creazione dell'utente da user.rb
+
+
+# # Aggiunta degli stipendi per ogni utente
+# User.all.each do |user|
+#   # Genera 12 stipendi, uno per ogni mese del 2024
+#   (1..12).each do |month|
+#     Salaire.create!(
+#       date: Date.new(2024, month, 1),   # La data dello stipendio: primo giorno di ogni mese
+#       value: rand(2000..5000),          # Importo dello stipendio casuale tra 2000€ e 5000€
+#       employee_id: user.id              # Associa lo stipendio all'utente corrente
+#     )
+#   end
+# end
 
 # Aggiunta degli orari di lavoro per ogni utente
-User.all.each do |user|
-  days_of_week = %w[Monday Tuesday Wednesday Thursday Friday]
+# User.all.each do |user|
+#   days_of_week = %w[Monday Tuesday Wednesday Thursday Friday]
 
-  days_of_week.each do |day|
-    DayScheduling.create!(
-      date: Date.parse(day),               # Giorno della settimana
-      start_work: '09:00',                 # Orario di inizio lavoro
-      end_work: '17:00',                   # Orario di fine lavoro
-      start_break: '13:00',                # Inizio pausa pranzo
-      end_break: '14:00',                  # Fine pausa pranzo
-      employee_id: user.id                 # Associa l'orario di lavoro all'utente corrente
-    )
-  end
-end
+#   days_of_week.each do |day|
+#     DayScheduling.create!(
+#       date: Date.parse(day),               # Giorno della settimana
+#       start_work: '09:00',                 # Orario di inizio lavoro
+#       end_work: '17:00',                   # Orario di fine lavoro
+#       start_break: '13:00',                # Inizio pausa pranzo
+#       end_break: '14:00',                  # Fine pausa pranzo
+#       employee_id: user.id                 # Associa l'orario di lavoro all'utente corrente
+#     )
+#   end
+# end
 
 
 # Aggiunta delle vacanze per ogni utente
-User.all.each do |user|
-  Holiday.create!(
-    taken: rand(0..15),
-    left: rand(0..30),
-    employee_id: user.id
-  )
-end
-
+# User.all.each do |user|
+#   Holiday.create!(
+#     taken: rand(0..15),
+#     left: rand(0..30),
+#     employee_id: user.id
+#   )
+# end

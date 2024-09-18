@@ -1,19 +1,7 @@
 <!-- Form per selezionare il mese -->
-<div class="container">
-  <% if user.present? %>
-    <%= form_with url: show_selected_user_info_users_path, method: :get, local: true, html: { class: 'mb-3' } do |f| %>
-      <div class="form-group">
-        <%= f.label :month, 'Seleziona il mese:' %>
-        <%= f.date_field :month, value: params[:month] || Date.current.strftime('%Y-%m-01'), class: 'form-control', placeholder: 'YYYY-MM', required: true, max: Date.current.strftime('%Y-%m-01') %>
-      </div>
-      <!-- Campo nascosto per passare l'ID dell'utente -->
-      <%= hidden_field_tag :user_id, user.id %>
-      <%= f.submit 'Filtra', class: 'btn btn-primary' %>
-    <% end %>
-  <% else %>
-    <p>Utente non trovato.</p>
-  <% end %>
+<div id="StipendiInfo">
 
+  <h2>Stipendi del Dipendente</h2>
   <% if user.salaires.present? %>
     <div class="list-group">
       <% user.salaires.each do |salaire| %>
@@ -25,7 +13,7 @@
           </button>
 
           <!-- Modale per la modifica dello stipendio -->
-          <div class="modal fade" id="salaireModal_<%= salaire.id %>" tabindex="-1" role="dialog" aria-labelledby="salaireModalLabel_<%= salaire.id %>" aria-hidden="true">
+          <div class="modal fade" id="salaireModal_<%= salaire.id %>" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -34,8 +22,9 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <%= form_with(model: salaire, url: update_salaire_user_path(salaire.id), method: :patch, local: true) do |f| %>
-                  <div class="modal-body">
+                <div class="modal-body">
+                  <%= form_with(model: salaire, url: update_salaire_user_path(salaire.id), method: :patch, local: true) do |f| %>
+                  
                     <div class="form-group">
                       <%= f.label :date, 'Data' %>
                       <%= f.date_field :date, class: 'form-control' %>
@@ -44,12 +33,13 @@
                       <%= f.label :value, 'Valore' %>
                       <%= f.number_field :value, class: 'form-control' %>
                     </div>
-                  </div>
-                  <div class="modal-footer">
+                  
+                  <%# <div class="modal-footer"> %>
                     <%= f.submit 'Aggiorna', class: 'btn btn-primary' %>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-                  </div>
+                  <%# </div> %>
                 <% end %>
+                </div>
               </div>
             </div>
           </div>

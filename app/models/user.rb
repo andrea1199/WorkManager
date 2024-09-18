@@ -46,31 +46,38 @@ class User < ApplicationRecord
   end
 
   def inizializza_campi
-    days_of_week = %w[Monday Tuesday Wednesday Thursday Friday]
-    days_of_week.each do |day|
-      self.day_schedulings.create!(
-        date: Date.parse(day),               # Giorno della settimana
-        start_work: '09:00',                 # Orario di inizio lavoro
-        end_work: '17:00',                   # Orario di fine lavoro
-        start_break: '13:00',                # Inizio pausa pranzo
-        end_break: '14:00',                  # Fine pausa pranzo
-        employee_id: self.id                # Associa l'orario di lavoro all'utente corrente
+    if self.day_schedulings.empty?
+      days_of_week = %w[Monday Tuesday Wednesday Thursday Friday]
+      days_of_week.each do |day|
+        self.day_schedulings.create!(
+          date: Date.parse(day),               # Giorno della settimana
+          start_work: '09:00',                 # Orario di inizio lavoro
+          end_work: '17:00',                   # Orario di fine lavoro
+          start_break: '13:00',                # Inizio pausa pranzo
+          end_break: '14:00',                  # Fine pausa pranzo
+          employee_id: self.id                # Associa l'orario di lavoro all'utente corrente
+        )
+      end
+    end
+    if self.holidays.empty?
+      self.holidays.create!(
+        taken: rand(0..15),
+        left: rand(0..30),
+        employee_id: self.id
       )
     end
-    self.holidays.create!(
-      taken: rand(0..15),
-      left: rand(0..30),
-      employee_id: self.id
-    )
-    (1..12).each do |month|
-      self.salaires.create!(
-        date: Date.new(2024, month, 1),   # La data dello stipendio: primo giorno di ogni mese
-        value: rand(2000..5000),          # Importo dello stipendio casuale tra 2000€ e 5000€
-        employee_id: self.id              # Associa lo stipendio all'utente corrente
-      )
+    if self.salaires.empty?
+      (1..12).each do |month|
+        self.salaires.create!(
+          date: Date.new(2024, month, 1),   # La data dello stipendio: primo giorno di ogni mese
+          value: rand(2000..5000),          # Importo dello stipendio casuale tra 2000€ e 5000€
+          employee_id: self.id              # Associa lo stipendio all'utente corrente
+        )
+      end
     end
   end
-  
+
+
   after_create :inizializza_campi
 
 end
