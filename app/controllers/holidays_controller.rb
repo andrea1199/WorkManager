@@ -18,6 +18,7 @@ class HolidaysController < ApplicationController
   end
 
   def update
+    puts "Params: #{params.inspect}"
     @holiday = Holiday.find(params[:id]) # Trova la vacanza specifica
   
     if @holiday.update(holiday_params)
@@ -26,7 +27,6 @@ class HolidaysController < ApplicationController
       redirect_to user_path(current_user), alert: 'Errore nell\'aggiornamento delle ferie.'
     end
   end
-  
 
   private
 

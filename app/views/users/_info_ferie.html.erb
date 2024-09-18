@@ -3,7 +3,7 @@
     <h2>Ferie del Dipendente</h2>
     <% if user.holidays.present? %>
       <% user.holidays.each do |holiday| %>
-        <%= form_with(model: holiday, url: update_holidays_user_path(user), method: :patch, local: true, id: "holiday_form_#{holiday.id}") do |f| %>
+        <%= form_with(model: holiday, url: update_holidays_user_path(holiday.id), method: :patch, local: true) do |f| %>
           <table class="table">
             <thead>
               <tr>
