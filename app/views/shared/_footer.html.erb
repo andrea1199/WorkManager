@@ -1,16 +1,16 @@
-<!-- Footer -->
-<footer class="border-top">
-  <div class="container">
-    <div class="d-flex flex-wrap">
-      <p class="col-md-4 text-muted px-4">&copy; 2024 WorkManager</p>
-      <ul class="nav col-md-4 justify-content-end px-4">
-        <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
-        <li class="nav-item"><a href="/faq" class="nav-link px-2 text-muted">FAQ</a></li>
-      </ul>
-      <a href="/" class="col-md-4 d-flex mb-md-0">
-        <!-- Aspetto dell'immagine originale: 3.66:1 -->
-        <%=image_tag "logo.jpg",:size => '75x75' %>
-      </a>
+<footer class="container-fluid d-flex justify-content-between align-items-center">
+    <!-- Testo a sinistra con simbolo di copyright e stile mutato -->
+    <div class="text-left text-muted">
+        <span>&copy; 2024 WorkManager</span>
     </div>
-  </div>
+
+    <!-- Link e logo a destra -->
+    <div class="ml-auto d-flex align-items-center">
+        <!-- Link Home -->
+        <a href="#home" class="mx-2">Home</a>
+        <!-- Link FAQ -->
+        <a href="#faq" class="mx-2">FAQ</a>
+        <!-- Logo -->
+        <%= image_tag "logo.jpg", size: '75x75' %>
+    </div>
 </footer>
