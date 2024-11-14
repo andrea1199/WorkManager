@@ -3,15 +3,15 @@
     
     <!-- Logo -->
     <a href="/" class="d-flex align-items-center">
-      <%= image_tag "logo.jpg", size: '100x100', class: "me-3" %>
+      <%= image_tag "logo.jpg", size: '100x100', class: "ms-3" %>
     </a>
 
     <!-- Navbar e altri elementi -->
     <div class="d-flex align-items-center">
       <!-- Bottone "Chi siamo" -->
-      <a href="/chiSiamo" class="btn btn-primary text-white ms-3">Chi siamo</a>
+      <a href="/chiSiamo" class="btn btn-primary text-white ms-2">Chi siamo</a>
 
-      <!-- Barra di ricerca -->
+      <!-- Barra di ricerca 
       <div class="input-group ms-3" style="max-width: 300px;">
         <input id="src" type="search" class="form-control" placeholder="Cerca persone" aria-label="Search">
         <div class="input-group-append">
@@ -19,12 +19,12 @@
             <i class="fa fa-search"></i>
           </button>
         </div>
-      </div>
+      </div-->
 
       <!-- Pulsanti di accesso/registrazione -->
       <% if user_signed_in? %>
         <!-- Dropdown se l'utente è loggato -->
-        <div class="dropdown ms-3">
+        <div class="dropdown ms-2">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Ciao, <%= current_user.nome %>
           </button>
@@ -37,8 +37,8 @@
         </div>
       <% else %>
         <!-- Pulsanti di accesso e registrazione se non loggato -->
-        <a href="/signin" class="btn btn-primary ms-3">Accedi</a>
-        <a href="/signup" class="btn btn-outline-primary ms-3">Registrati</a>
+        <a href="/signin" class="btn btn-primary ms-2">Accedi</a>
+        <a href="/signup" class="btn btn-outline-primary ms-2">Registrati</a>
       <% end %>
     </div>
     
